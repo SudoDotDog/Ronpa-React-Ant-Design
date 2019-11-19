@@ -2,15 +2,18 @@
 name: Story
 ---
 
+import { Playground } from "docz";
+import { createMockStory } from "./mock/story"
 import { RonpaStory } from "../src/index";
-import { Playground } from 'docz'
 
 # Story
 
-## Overflow
+<link href="https://cdn.jsdelivr.net/npm/antd@3.25.2/dist/antd.min.css" rel="stylesheet" />
+
+## Common
 
 <Playground>
   <RonpaStory 
-    
+    story={createMockStory()}
   />
 </Playground>
