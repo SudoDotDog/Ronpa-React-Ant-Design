@@ -14,7 +14,15 @@ export const createMockStory = () => {
 
     const story: Story = Story.create();
 
-    const bullet: Bullet = Bullet.fromRecord({
+    const bullet1: Bullet = Bullet.fromRecord({
+        id: chance.string(),
+        content: chance.paragraph(),
+        at: new Date(),
+        by: chance.name(),
+        story: story.id,
+    });
+
+    const bullet2: Bullet = Bullet.fromRecord({
         id: chance.string(),
         content: chance.paragraph(),
         at: new Date(),
@@ -30,7 +38,8 @@ export const createMockStory = () => {
         story: story.id,
     });
 
-    story.addBullet(bullet);
+    story.addBullet(bullet1);
+    story.addBullet(bullet2);
     story.setThesis(thesis, {
         insiders: [
             chance.name(),

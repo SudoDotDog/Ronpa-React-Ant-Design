@@ -15,6 +15,8 @@ export type RonpaStoryProps = {
     readonly className?: string;
 
     readonly story: Story;
+
+    readonly getAvatar?: (author: string) => string | React.ReactNode;
 };
 
 export class RonpaStory extends React.Component<RonpaStoryProps> {
@@ -24,23 +26,45 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
     public constructor(props: RonpaStoryProps) {
 
         super(props);
+
+        this._renderBullets = this._renderBullets.bind(this);
     }
 
     public render() {
 
-        console.log(this.props);
+        const story: Story = this.props.story;
+        const first: Bullet = story.assertThesisBullet();
 
-        const first: Bullet = this.props.story.assertThesisBullet();
+        return (<Comment
+            key={first.id}
+            content={first.content}
+            avatar={this._getAvatar(first)}
+            author={first.by}
+            datetime={<span>{first.at.toLocaleString()}</span>}
+            actions={[
+                <span onClick={console.log} key="reply-to">Reply to</span>,
+            ]}
+        >
+            {story.bullets.map(this._renderBullets)}
+        </Comment>);
+    }
 
-        return (<div>
-            <Comment
-                key={this.props.story.id}
-                content={first.content}
-                author={first.by}
-                datetime={<span>{first.at.toLocaleString()}</span>}
-            >
+    private _renderBullets(bullet: Bullet) {
 
-            </Comment>
-        </div>);
+        return (<Comment
+            key={bullet.id}
+            content={bullet.content}
+            avatar={this._getAvatar(bullet)}
+            author={bullet.by}
+            datetime={<span>{bullet.at.toLocaleString()}</span>}
+        />);
+    }
+
+    private _getAvatar(bullet: Bullet): string | React.ReactNode | undefined {
+
+        if (this.props.getAvatar) {
+            return this.props.getAvatar(bullet.by);
+        }
+        return undefined;
     }
 }
