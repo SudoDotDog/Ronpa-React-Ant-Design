@@ -5,9 +5,9 @@
  */
 
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
-import { Comment } from "antd";
+import { Comment, Icon } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, draftAddReactionChange, draftAddReplyChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION } from "ronpa";
+import { Bullet, ChangeType, draftAddReactionChange, draftAddReplyChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
@@ -18,10 +18,13 @@ export type RonpaBulletProps = {
     readonly style?: React.CSSProperties;
     readonly className?: string;
 
+    readonly contentStyle?: React.CSSProperties;
+
     readonly username: string;
     readonly storyId: string;
     readonly bullet: Bullet;
 
+    readonly thesis?: Thesis;
     readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
 
@@ -60,7 +63,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             )}
             style={this.props.style}
             key={bullet.id}
-            content={bullet.content}
+            content={this._renderContent()}
             avatar={this._getAvatar(bullet)}
             author={bullet.by}
             datetime={<span>{bullet.at.toLocaleString()}</span>}
@@ -69,6 +72,40 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             {this._renderEditor()}
             {this.props.children}
         </Comment>);
+    }
+
+    private _renderContent() {
+
+        if (!this.props.thesis || this.props.thesis.insiders.length === 0) {
+            return (<div
+                style={this.props.contentStyle}
+            >
+                {this.props.bullet.content}
+            </div>);
+        }
+
+        return (<div>
+            {this._renderInsiders()}
+            <div
+                style={this.props.contentStyle}
+            >{this.props.bullet.content}</div>
+        </div>);
+    }
+
+    private _renderInsiders() {
+
+        if (!this.props.thesis) {
+            return null;
+        }
+
+        const insiders: string[] = this.props.thesis.insiders;
+
+        return (<div>
+            <Icon type="team" />
+            {insiders.map((name: string) =>
+                (<span className={this._bulletStyle.username}> @{name} </span>),
+            )}
+        </div>);
     }
 
     private _renderEditor() {

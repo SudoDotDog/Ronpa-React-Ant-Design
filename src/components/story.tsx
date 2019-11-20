@@ -16,6 +16,8 @@ export type RonpaStoryProps = {
     readonly style?: React.CSSProperties;
     readonly className?: string;
 
+    readonly contentStyle?: React.CSSProperties;
+
     readonly username: string;
     readonly story: Story;
 
@@ -48,9 +50,11 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
                 this.props.className,
             )}
             style={this.props.style}
+            contentStyle={this.props.contentStyle}
             username={this.props.username}
             storyId={story.id}
             bullet={first}
+            thesis={story.assertThesis()}
             repliable={this.props.repliable}
             reactions={this.props.reactions}
             getAvatar={this.props.getAvatar}
@@ -65,6 +69,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
         return (<RonpaBullet
             key={bullet.id}
             username={this.props.username}
+            contentStyle={this.props.contentStyle}
             storyId={this.props.story.id}
             bullet={bullet}
             repliable={this.props.repliable}

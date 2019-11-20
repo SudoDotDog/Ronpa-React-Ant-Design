@@ -63,13 +63,13 @@ export class RonpaEditor extends React.Component<RonpaEditorProps, RonpaEditorSt
                         content: value.target.value,
                     })}
                 />
+                <Button
+                    className={this._editorStyle.submitButton}
+                    type="primary"
+                    onClick={this._submitChange}
+                >Submit</Button>
             </div>}
-        >
-            <Button
-                type="primary"
-                onClick={this._submitChange}
-            >Submit</Button>
-        </Comment>);
+        />);
     }
 
     private _submitChange() {

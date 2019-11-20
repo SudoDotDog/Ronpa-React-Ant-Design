@@ -16,6 +16,8 @@ export type RonpaCommentsProps = {
     readonly style?: React.CSSProperties;
     readonly className?: string;
 
+    readonly contentStyle?: React.CSSProperties;
+
     readonly username: string;
     readonly ronpa: Ronpa;
 
@@ -56,6 +58,7 @@ export class RonpaComments extends React.Component<RonpaCommentsProps> {
 
         return (<RonpaStory
             key={story.id}
+            contentStyle={this.props.contentStyle}
             username={this.props.username}
             story={story}
             repliable={this.props.repliable}

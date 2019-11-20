@@ -20,6 +20,9 @@ const editorStyleBase: JSSStyle = {
         opacity: 0,
         maxHeight: '0px',
     },
+    submitButton: {
+        marginTop: '5px',
+    },
 };
 
 export const editorStyle: StyleManager = StyleManager.create(editorStyleBase, 'Editor').setPrefix('Ronpa-React-Ant-Design-');
