@@ -21,6 +21,7 @@ export type RonpaBulletProps = {
     readonly username: string;
     readonly bullet: Bullet;
 
+    readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
@@ -60,14 +61,23 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             datetime={<span>{bullet.at.toLocaleString()}</span>}
             actions={this._renderActions(bullet)}
         >
-            <RonpaEditor
-                username={this.props.username}
-                visible={this.state.replying}
-                getAvatar={this.props.getAvatar}
-                onChange={this._emitChange}
-            />
+            {this._renderEditor()}
             {this.props.children}
         </Comment>);
+    }
+
+    private _renderEditor() {
+
+        if (!this.props.repliable) {
+            return null;
+        }
+
+        return (<RonpaEditor
+            username={this.props.username}
+            visible={this.state.replying}
+            getAvatar={this.props.getAvatar}
+            onChange={this._emitChange}
+        />);
     }
 
     private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
@@ -80,14 +90,11 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
 
     private _renderActions(bullet: Bullet) {
 
-        const replyTo = (<span
-            onClick={() => this.setState({ replying: !this.state.replying })}
-            key="reply"
-        >{this.state.replying ? 'Cancel' : 'Reply'}</span>);
+        const actions: React.ReactNode[] = [];
 
         if (this.props.reactions) {
 
-            const reactions = this.props.reactions.map((reaction: ReactionPropsConfig) => {
+            const reactions: React.ReactNode[] = this.props.reactions.map((reaction: ReactionPropsConfig) => {
 
                 const count: number = countReactionType(bullet, reaction);
                 const active: boolean = hasReactionType(bullet, reaction, this.props.username);
@@ -112,11 +119,19 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
                 >{reaction.text} {count}</span>);
             });
 
-
-            return [replyTo].concat(reactions);
+            actions.push(...reactions);
         }
 
-        return [replyTo];
+        if (this.props.repliable) {
+
+            const replyTo: React.ReactNode = (<span
+                onClick={() => this.setState({ replying: !this.state.replying })}
+                key="reply"
+            >{this.state.replying ? 'Cancel' : 'Reply'}</span>);
+            return [replyTo].concat(actions);
+        }
+
+        return actions;
     }
 
     private _getAvatar(bullet: Bullet): string | React.ReactNode | undefined {

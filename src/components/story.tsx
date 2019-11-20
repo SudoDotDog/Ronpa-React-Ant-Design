@@ -18,6 +18,7 @@ export type RonpaStoryProps = {
     readonly username: string;
     readonly story: Story;
 
+    readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
@@ -44,6 +45,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
         return (<RonpaBullet
             username={this.props.username}
             bullet={first}
+            repliable={this.props.repliable}
             reactions={this.props.reactions}
             getAvatar={this.props.getAvatar}
             onChange={this._emitChange}
@@ -58,6 +60,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             key={bullet.id}
             username={this.props.username}
             bullet={bullet}
+            repliable={this.props.repliable}
             reactions={this.props.reactions}
             getAvatar={this.props.getAvatar}
             onChange={this._emitChange}

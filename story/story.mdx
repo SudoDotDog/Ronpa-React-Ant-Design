@@ -10,12 +10,23 @@ import { RonpaStory } from "../src/index";
 
 <link href="https://cdn.jsdelivr.net/npm/antd@3.25.2/dist/antd.min.css" rel="stylesheet" />
 
-## Common
+## Simple
+
+<Playground>
+  <RonpaStory 
+    username="Jack"
+    onChange={console.log}
+    story={createMockStory()}
+  />
+</Playground>
+
+## Replible
 
 <Playground>
   <RonpaStory 
     getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
     username="Jack"
+    repliable
     onChange={console.log}
     story={createMockStory()}
   />
