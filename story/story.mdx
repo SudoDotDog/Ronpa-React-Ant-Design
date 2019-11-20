@@ -24,7 +24,13 @@ import { RonpaStory } from "../src/index";
 <Playground>
   <RonpaStory 
     getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
-    reactions={['Like', 'Dislike']}
+    reactions={[{
+      name: 'like',
+      text: '👍',
+    }, {
+      name: 'love',
+      text: '😍',
+    }]}
     story={createMockStory()}
   />
 </Playground>
