@@ -40,10 +40,11 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
     public render() {
 
         const story: Story = this.props.story;
-        const first: Bullet = story.assertThesisBullet();
+        const first: Bullet = this.props.story.assertThesisBullet();
 
         return (<RonpaBullet
             username={this.props.username}
+            storyId={story.id}
             bullet={first}
             repliable={this.props.repliable}
             reactions={this.props.reactions}
@@ -59,6 +60,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
         return (<RonpaBullet
             key={bullet.id}
             username={this.props.username}
+            storyId={this.props.story.id}
             bullet={bullet}
             repliable={this.props.repliable}
             reactions={this.props.reactions}

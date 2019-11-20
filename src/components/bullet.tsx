@@ -7,7 +7,7 @@
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION } from "ronpa";
+import { Bullet, ChangeType, draftAddReactionChange, draftAddReplyChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
@@ -19,6 +19,7 @@ export type RonpaBulletProps = {
     readonly className?: string;
 
     readonly username: string;
+    readonly storyId: string;
     readonly bullet: Bullet;
 
     readonly repliable?: boolean;
@@ -76,9 +77,13 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             username={this.props.username}
             visible={this.state.replying}
             getAvatar={this.props.getAvatar}
-            onSubmit={(content: string) => {
-                // TODO
-            }}
+            onSubmit={(content: string) => this._emitChange(draftAddReplyChange({
+                by: this.props.username,
+                type: RECORD_TYPE.TEXT,
+                story: this.props.storyId,
+                reply: this.props.bullet.id,
+                content,
+            }))}
         />);
     }
 

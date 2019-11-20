@@ -38,6 +38,8 @@ export class RonpaEditor extends React.Component<RonpaEditorProps, RonpaEditorSt
     public constructor(props: RonpaEditorProps) {
 
         super(props);
+
+        this._submitChange = this._submitChange.bind(this);
     }
 
     public render() {
@@ -63,9 +65,17 @@ export class RonpaEditor extends React.Component<RonpaEditorProps, RonpaEditorSt
         >
             <Button
                 type="primary"
-                onClick={() => this.props.onSubmit(this.state.content)}
+                onClick={this._submitChange}
             >Submit</Button>
         </Comment>);
+    }
+
+    private _submitChange() {
+
+        if (this.props.onSubmit) {
+            this.props.onSubmit(this.state.content);
+        }
+        return;
     }
 
     private _getAvatar(username: string): string | React.ReactNode | undefined {
