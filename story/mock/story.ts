@@ -6,19 +6,27 @@
  */
 
 import * as Chance from "chance";
-import { Bullet, Story } from "ronpa";
+import { Bullet, Reaction, Story } from "ronpa";
 
-export const createMockStory = () => {
+export const createMockStory = (username?: string) => {
 
     const chance: Chance.Chance = new Chance('story-mock-story');
 
     const story: Story = Story.create();
+    const reactions: Reaction[] = username ? [
+        {
+            by: username,
+            type: 'like',
+            at: new Date(),
+        },
+    ] : [];
 
     const bullet1: Bullet = Bullet.fromRecord({
         id: chance.string(),
         content: chance.paragraph(),
         at: new Date(),
         by: chance.name(),
+        reactions,
         story: story.id,
     });
 
@@ -35,6 +43,7 @@ export const createMockStory = () => {
         content: chance.paragraph(),
         at: new Date(),
         by: chance.name(),
+        reactions,
         story: story.id,
     });
 

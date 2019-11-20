@@ -6,7 +6,7 @@
 
 import * as React from "react";
 
-export type ReactionConfig = {
+export type ReactionPropsConfig = {
 
     readonly name: string;
     readonly text: React.ReactNode;

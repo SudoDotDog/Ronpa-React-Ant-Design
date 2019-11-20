@@ -4,11 +4,13 @@
  * @description Story
  */
 
+import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, Reaction, RONPA_ACTION, Story } from "ronpa";
-import { ReactionConfig } from "./declare";
+import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
+import { ReactionPropsConfig } from "./declare";
 import { storyStyle } from "./style/story";
+import { countReactionType, hasReactionType } from "./util";
 
 export type RonpaStoryProps = {
 
@@ -17,7 +19,8 @@ export type RonpaStoryProps = {
 
     readonly story: Story;
 
-    readonly reactions: ReactionConfig[];
+    readonly username?: string;
+    readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
     readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
@@ -76,12 +79,17 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
 
         if (this.props.reactions) {
 
-            const reactions = this.props.reactions.map((reaction: ReactionConfig) => {
+            const reactions = this.props.reactions.map((reaction: ReactionPropsConfig) => {
 
-                const count: number = bullet.reactions.filter((each: Reaction) => {
-                    return each.type === reaction.name;
-                }).length;
-                return (<span onClick={console.log} key={`reaction-${reaction.name}`}>{reaction.text} {count}</span>);
+                const count: number = countReactionType(bullet, reaction);
+                const active: boolean = hasReactionType(bullet, reaction, this.props.username);
+                return (<span
+                    onClick={console.log}
+                    className={mergeClasses(
+                        assertIfTrue(active, this._storyStyle.activeReaction),
+                    )}
+                    key={`reaction-${reaction.name}`}
+                >{reaction.text} {count}</span>);
             });
 
 
