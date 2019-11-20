@@ -21,6 +21,7 @@ export type RonpaCommentsProps = {
     readonly username: string;
     readonly ronpa: Ronpa;
 
+    readonly insiders?: boolean;
     readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
 
@@ -57,12 +58,16 @@ export class RonpaComments extends React.Component<RonpaCommentsProps> {
     private _renderStories(story: Story) {
 
         return (<RonpaStory
+
             key={story.id}
             contentStyle={this.props.contentStyle}
             username={this.props.username}
             story={story}
+
+            insiders={this.props.insiders}
             repliable={this.props.repliable}
             reactions={this.props.reactions}
+
             getAvatar={this.props.getAvatar}
             onChange={this._emitChange}
         />);

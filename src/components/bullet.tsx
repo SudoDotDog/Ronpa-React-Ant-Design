@@ -25,6 +25,8 @@ export type RonpaBulletProps = {
     readonly bullet: Bullet;
 
     readonly thesis?: Thesis;
+
+    readonly insiders?: boolean;
     readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
 
@@ -98,6 +100,10 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             return null;
         }
 
+        if (!this.props.insiders) {
+            return null;
+        }
+
         const insiders: string[] = this.props.thesis.insiders;
 
         return (<div>
@@ -115,6 +121,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
         }
 
         return (<RonpaEditor
+
             username={this.props.username}
             visible={this.state.replying}
             getAvatar={this.props.getAvatar}

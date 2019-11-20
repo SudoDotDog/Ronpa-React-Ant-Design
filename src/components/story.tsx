@@ -21,6 +21,7 @@ export type RonpaStoryProps = {
     readonly username: string;
     readonly story: Story;
 
+    readonly insiders?: boolean;
     readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
 
@@ -46,17 +47,22 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
         const first: Bullet = this.props.story.assertThesisBullet();
 
         return (<RonpaBullet
+
             className={mergeClasses(
                 this.props.className,
             )}
             style={this.props.style}
+
             contentStyle={this.props.contentStyle}
             username={this.props.username}
             storyId={story.id}
             bullet={first}
             thesis={story.assertThesis()}
+
+            insiders={this.props.insiders}
             repliable={this.props.repliable}
             reactions={this.props.reactions}
+
             getAvatar={this.props.getAvatar}
             onChange={this._emitChange}
         >
@@ -67,13 +73,18 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
     private _renderBullets(bullet: Bullet) {
 
         return (<RonpaBullet
+
             key={bullet.id}
+
             username={this.props.username}
             contentStyle={this.props.contentStyle}
             storyId={this.props.story.id}
             bullet={bullet}
+
+            insiders={this.props.insiders}
             repliable={this.props.repliable}
             reactions={this.props.reactions}
+
             getAvatar={this.props.getAvatar}
             onChange={this._emitChange}
         />);
