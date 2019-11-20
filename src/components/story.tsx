@@ -4,13 +4,10 @@
  * @description Story
  */
 
-import { assertIfTrue, mergeClasses } from "@sudoo/jss";
-import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Story } from "ronpa";
+import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { storyStyle } from "../style/story";
-import { countReactionType, hasReactionType } from "../util";
 import { RonpaBullet } from "./bullet";
 
 export type RonpaStoryProps = {
@@ -35,6 +32,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
 
         super(props);
 
+        this._emitChange = this._emitChange.bind(this);
         this._renderBullets = this._renderBullets.bind(this);
     }
 
@@ -48,18 +46,10 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             bullet={first}
             reactions={this.props.reactions}
             getAvatar={this.props.getAvatar}
-            onChange={this.props.onChange}
+            onChange={this._emitChange}
         >
             {story.bullets.map(this._renderBullets)}
         </RonpaBullet>);
-    }
-
-    private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
-
-        if (this.props.onChange) {
-            this.props.onChange(change);
-        }
-        return;
     }
 
     private _renderBullets(bullet: Bullet) {
@@ -70,7 +60,15 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             bullet={bullet}
             reactions={this.props.reactions}
             getAvatar={this.props.getAvatar}
-            onChange={this.props.onChange}
+            onChange={this._emitChange}
         />);
+    }
+
+    private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
+
+        if (this.props.onChange) {
+            this.props.onChange(change);
+        }
+        return;
     }
 }

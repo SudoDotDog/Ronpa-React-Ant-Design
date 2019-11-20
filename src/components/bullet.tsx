@@ -11,6 +11,7 @@ import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, 
 import { ReactionPropsConfig } from "../declare";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
+import { RonpaEditor } from "./editor";
 
 export type RonpaBulletProps = {
 
@@ -26,9 +27,26 @@ export type RonpaBulletProps = {
     readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
 };
 
-export class RonpaBullet extends React.Component<RonpaBulletProps> {
+export type RonpaBulletStates = {
+
+    replying: boolean;
+};
+
+export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletStates> {
+
+    public readonly state: RonpaBulletStates = {
+
+        replying: false,
+    };
 
     private readonly _bulletStyle = bulletStyle.use();
+
+    public constructor(props: RonpaBulletProps) {
+
+        super(props);
+
+        this._emitChange = this._emitChange.bind(this);
+    }
 
     public render() {
 
@@ -42,6 +60,12 @@ export class RonpaBullet extends React.Component<RonpaBulletProps> {
             datetime={<span>{bullet.at.toLocaleString()}</span>}
             actions={this._renderActions(bullet)}
         >
+            <RonpaEditor
+                username={this.props.username}
+                visible={this.state.replying}
+                getAvatar={this.props.getAvatar}
+                onChange={this._emitChange}
+            />
             {this.props.children}
         </Comment>);
     }
@@ -56,7 +80,10 @@ export class RonpaBullet extends React.Component<RonpaBulletProps> {
 
     private _renderActions(bullet: Bullet) {
 
-        const replyTo = (<span onClick={console.log} key="reply-to">Reply to</span>);
+        const replyTo = (<span
+            onClick={() => this.setState({ replying: !this.state.replying })}
+            key="reply"
+        >{this.state.replying ? 'Cancel' : 'Reply'}</span>);
 
         if (this.props.reactions) {
 
