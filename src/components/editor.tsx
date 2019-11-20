@@ -46,9 +46,11 @@ export class RonpaEditor extends React.Component<RonpaEditorProps, RonpaEditorSt
 
         return (<Comment
             className={mergeClasses(
+                this.props.className,
                 this._editorStyle.editor,
                 assertIfTri(this.props.visible, this._editorStyle.visible, this._editorStyle.invisible),
             )}
+            style={this.props.style}
             avatar={this._getAvatar(this.props.username)}
             content={<div>
                 <Input.TextArea

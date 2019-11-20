@@ -1,23 +1,23 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design
- * @description Story
+ * @description Ronpa
  */
 
 import { mergeClasses } from "@sudoo/jss";
 import * as React from "react";
-import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
+import { ChangeType, Ronpa, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
-import { storyStyle } from "../style/story";
-import { RonpaBullet } from "./bullet";
+import { ronpaStyle } from "../style/ronpa";
+import { RonpaStory } from "./story";
 
-export type RonpaStoryProps = {
+export type RonpaCommentsProps = {
 
     readonly style?: React.CSSProperties;
     readonly className?: string;
 
     readonly username: string;
-    readonly story: Story;
+    readonly ronpa: Ronpa;
 
     readonly repliable?: boolean;
     readonly reactions?: ReactionPropsConfig[];
@@ -26,47 +26,38 @@ export type RonpaStoryProps = {
     readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
 };
 
-export class RonpaStory extends React.Component<RonpaStoryProps> {
+export class RonpaComments extends React.Component<RonpaCommentsProps> {
 
-    private readonly _storyStyle = storyStyle.use();
+    private readonly _ronpaStyle = ronpaStyle.use();
 
-    public constructor(props: RonpaStoryProps) {
+    public constructor(props: RonpaCommentsProps) {
 
         super(props);
 
         this._emitChange = this._emitChange.bind(this);
-        this._renderBullets = this._renderBullets.bind(this);
+        this._renderStories = this._renderStories.bind(this);
     }
 
     public render() {
 
-        const story: Story = this.props.story;
-        const first: Bullet = this.props.story.assertThesisBullet();
+        const stories: Story[] = this.props.ronpa.getThesisStories();
 
-        return (<RonpaBullet
+        return (<div
             className={mergeClasses(
                 this.props.className,
             )}
             style={this.props.style}
-            username={this.props.username}
-            storyId={story.id}
-            bullet={first}
-            repliable={this.props.repliable}
-            reactions={this.props.reactions}
-            getAvatar={this.props.getAvatar}
-            onChange={this._emitChange}
         >
-            {story.bullets.map(this._renderBullets)}
-        </RonpaBullet>);
+            {stories.map(this._renderStories)}
+        </div>);
     }
 
-    private _renderBullets(bullet: Bullet) {
+    private _renderStories(story: Story) {
 
-        return (<RonpaBullet
-            key={bullet.id}
+        return (<RonpaStory
+            key={story.id}
             username={this.props.username}
-            storyId={this.props.story.id}
-            bullet={bullet}
+            story={story}
             repliable={this.props.repliable}
             reactions={this.props.reactions}
             getAvatar={this.props.getAvatar}

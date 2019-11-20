@@ -55,6 +55,10 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
         const bullet: Bullet = this.props.bullet;
 
         return (<Comment
+            className={mergeClasses(
+                this.props.className,
+            )}
+            style={this.props.style}
             key={bullet.id}
             content={bullet.content}
             avatar={this._getAvatar(bullet)}
