@@ -76,7 +76,9 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             username={this.props.username}
             visible={this.state.replying}
             getAvatar={this.props.getAvatar}
-            onChange={this._emitChange}
+            onSubmit={(content: string) => {
+                // TODO
+            }}
         />);
     }
 

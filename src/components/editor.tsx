@@ -7,7 +7,6 @@
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
 import { Button, Comment, Input } from "antd";
 import * as React from "react";
-import { ChangeType, RONPA_ACTION } from "ronpa";
 import { editorStyle } from "../style/editor";
 
 export type RonpaEditorProps = {
@@ -19,7 +18,7 @@ export type RonpaEditorProps = {
     readonly visible: boolean;
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
+    readonly onSubmit?: (content: string) => void;
 };
 
 export type RonpaEditorStates = {
@@ -64,16 +63,9 @@ export class RonpaEditor extends React.Component<RonpaEditorProps, RonpaEditorSt
         >
             <Button
                 type="primary"
+                onClick={() => this.props.onSubmit(this.state.content)}
             >Submit</Button>
         </Comment>);
-    }
-
-    private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
-
-        if (this.props.onChange) {
-            this.props.onChange(change);
-        }
-        return;
     }
 
     private _getAvatar(username: string): string | React.ReactNode | undefined {
