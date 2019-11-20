@@ -8,4 +8,8 @@ import { Register } from "@sudoo/jss";
 
 Register.register();
 
-export * from "./story";
+export * from "./components/story";
+export * from "./components/bullet";
+export * from "./declare";
+export * from "./util";
+

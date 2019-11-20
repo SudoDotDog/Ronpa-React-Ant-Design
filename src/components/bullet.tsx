@@ -1,24 +1,24 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design
- * @description Story
+ * @description Bullet
  */
 
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Story } from "ronpa";
-import { ReactionPropsConfig } from "./declare";
-import { storyStyle } from "./style/story";
-import { countReactionType, hasReactionType } from "./util";
+import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION } from "ronpa";
+import { ReactionPropsConfig } from "../declare";
+import { bulletStyle } from "../style/bullet";
+import { countReactionType, hasReactionType } from "../util";
 
-export type RonpaStoryProps = {
+export type RonpaBulletProps = {
 
     readonly style?: React.CSSProperties;
     readonly className?: string;
 
     readonly username: string;
-    readonly story: Story;
+    readonly bullet: Bullet;
 
     readonly reactions?: ReactionPropsConfig[];
 
@@ -26,31 +26,23 @@ export type RonpaStoryProps = {
     readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
 };
 
-export class RonpaStory extends React.Component<RonpaStoryProps> {
+export class RonpaBullet extends React.Component<RonpaBulletProps> {
 
-    private readonly _storyStyle = storyStyle.use();
-
-    public constructor(props: RonpaStoryProps) {
-
-        super(props);
-
-        this._renderBullets = this._renderBullets.bind(this);
-    }
+    private readonly _bulletStyle = bulletStyle.use();
 
     public render() {
 
-        const story: Story = this.props.story;
-        const first: Bullet = story.assertThesisBullet();
+        const bullet: Bullet = this.props.bullet;
 
         return (<Comment
-            key={first.id}
-            content={first.content}
-            avatar={this._getAvatar(first)}
-            author={first.by}
-            datetime={<span>{first.at.toLocaleString()}</span>}
-            actions={this._renderActions(first)}
+            key={bullet.id}
+            content={bullet.content}
+            avatar={this._getAvatar(bullet)}
+            author={bullet.by}
+            datetime={<span>{bullet.at.toLocaleString()}</span>}
+            actions={this._renderActions(bullet)}
         >
-            {story.bullets.map(this._renderBullets)}
+            {this.props.children}
         </Comment>);
     }
 
@@ -60,17 +52,6 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             this.props.onChange(change);
         }
         return;
-    }
-
-    private _renderBullets(bullet: Bullet) {
-
-        return (<Comment
-            key={bullet.id}
-            content={bullet.content}
-            avatar={this._getAvatar(bullet)}
-            author={bullet.by}
-            datetime={<span>{bullet.at.toLocaleString()}</span>}
-        />);
     }
 
     private _renderActions(bullet: Bullet) {
@@ -98,7 +79,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
                 return (<span
                     onClick={clickFunction}
                     className={mergeClasses(
-                        assertIfTrue(active, this._storyStyle.activeReaction),
+                        assertIfTrue(active, this._bulletStyle.activeReaction),
                     )}
                     key={`reaction-${reaction.name}`}
                 >{reaction.text} {count}</span>);
