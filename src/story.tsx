@@ -7,7 +7,7 @@
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
+import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "./declare";
 import { storyStyle } from "./style/story";
 import { countReactionType, hasReactionType } from "./util";
@@ -17,9 +17,9 @@ export type RonpaStoryProps = {
     readonly style?: React.CSSProperties;
     readonly className?: string;
 
+    readonly username: string;
     readonly story: Story;
 
-    readonly username?: string;
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
@@ -83,8 +83,20 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
 
                 const count: number = countReactionType(bullet, reaction);
                 const active: boolean = hasReactionType(bullet, reaction, this.props.username);
+
+                const clickFunction = active
+                    ? () => this._emitChange(draftRemoveReactionChange({
+                        reaction: reaction.name,
+                        by: this.props.username,
+                        bulletId: bullet.id,
+                    }))
+                    : () => this._emitChange(draftAddReactionChange({
+                        reaction: reaction.name,
+                        by: this.props.username,
+                        bulletId: bullet.id,
+                    }));
                 return (<span
-                    onClick={console.log}
+                    onClick={clickFunction}
                     className={mergeClasses(
                         assertIfTrue(active, this._storyStyle.activeReaction),
                     )}

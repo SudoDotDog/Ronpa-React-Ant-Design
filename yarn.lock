@@ -8750,10 +8750,10 @@ rmc-feedback@^2.0.0:
     babel-runtime "6.x"
     classnames "^2.2.5"
 
-ronpa@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/ronpa/-/ronpa-1.5.0.tgz#8a0caefe88434486e5169a4c1a7f1c972c4901e1"
-  integrity sha512-JgP0fxcAKtkbxtjbsgS/4d2h8Lc9lphZJ2f9Vl/1/O8YfT5PD2Gn0KqO0vgbBIo3nEFZJ966qsUuqBK0sgjZPQ==
+ronpa@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/ronpa/-/ronpa-1.6.0.tgz#7d3e654133fe554bbba9f843904602fcf307a028"
+  integrity sha512-By2L2e+jP+BoSO/fZy+Gt+3Cgpp4Iu8utI6rXNsn5QSw+w3F5xsNoQqilyRijFozX4z2HJalg5z1cZoR08k/SA==
   dependencies:
     "@sudoo/random" "^2.0.2"
 
