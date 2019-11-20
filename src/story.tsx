@@ -6,7 +6,7 @@
 
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, Story } from "ronpa";
+import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
 import { storyStyle } from "./style/story";
 
 export type RonpaStoryProps = {
@@ -16,7 +16,10 @@ export type RonpaStoryProps = {
 
     readonly story: Story;
 
+    readonly reactions: string[];
+
     readonly getAvatar?: (author: string) => string | React.ReactNode;
+    readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
 };
 
 export class RonpaStory extends React.Component<RonpaStoryProps> {
@@ -41,12 +44,18 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             avatar={this._getAvatar(first)}
             author={first.by}
             datetime={<span>{first.at.toLocaleString()}</span>}
-            actions={[
-                <span onClick={console.log} key="reply-to">Reply to</span>,
-            ]}
+            actions={this._renderActions()}
         >
             {story.bullets.map(this._renderBullets)}
         </Comment>);
+    }
+
+    private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
+
+        if (this.props.onChange) {
+            this.props.onChange(change);
+        }
+        return;
     }
 
     private _renderBullets(bullet: Bullet) {
@@ -58,6 +67,21 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             author={bullet.by}
             datetime={<span>{bullet.at.toLocaleString()}</span>}
         />);
+    }
+
+    private _renderActions() {
+
+        const replyTo = (<span onClick={console.log} key="reply-to">Reply to</span>);
+
+        if (this.props.reactions) {
+
+            const reactions = this.props.reactions.map((reaction: string) =>
+                <span onClick={console.log} key={`reaction-${reaction}`}>{reaction}</span>);
+
+            return [replyTo].concat(reactions);
+        }
+
+        return [replyTo];
     }
 
     private _getAvatar(bullet: Bullet): string | React.ReactNode | undefined {
