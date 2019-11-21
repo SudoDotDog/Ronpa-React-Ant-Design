@@ -90,7 +90,9 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             {this._renderInsiders()}
             <div
                 style={this.props.contentStyle}
-            >{this.props.bullet.content}</div>
+            >
+                {this.props.bullet.content}
+            </div>
         </div>);
     }
 

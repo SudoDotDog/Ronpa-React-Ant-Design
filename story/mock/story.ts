@@ -2,7 +2,7 @@
  * @author WMXPY
  * @namespace React_Ant_Design
  * @description Story
- * @override Story Mock
+ * @override Mock
  */
 
 import * as Chance from "chance";
@@ -10,7 +10,7 @@ import { Bullet, Reaction, Story } from "ronpa";
 
 export const createMockStory = (username?: string) => {
 
-    const chance: Chance.Chance = new Chance('story-mock-story');
+    const chance: Chance.Chance = new Chance('mock-story');
 
     const story: Story = Story.create();
     const reactions: Reaction[] = username ? [

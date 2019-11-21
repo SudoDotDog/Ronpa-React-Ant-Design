@@ -1,0 +1,33 @@
+---
+name: Bullet
+---
+
+import { Playground } from "docz";
+import { createMockBullet, createMockLongContentBullet } from "./mock/bullet"
+import { RonpaBullet } from "../src/index";
+
+# Bullet
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.25.2/dist/antd.min.css" rel="stylesheet" />
+
+## Simple
+
+<Playground>
+    <RonpaBullet
+        username="Jack"
+        storyId="test"
+        bullet={createMockBullet()}
+        onChange={console.log}
+    />
+</Playground>
+
+## Long Content
+
+<Playground>
+    <RonpaBullet
+        username="Jack"
+        storyId="test"
+        bullet={createMockLongContentBullet()}
+        onChange={console.log}
+    />
+</Playground>
