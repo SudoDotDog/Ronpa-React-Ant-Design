@@ -5,12 +5,13 @@
  */
 
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
-import { Comment, Icon } from "antd";
+import { Comment } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftAddReplyChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
+import { RonpaContent } from "./content";
 import { RonpaEditor } from "./editor";
 
 export type RonpaBulletProps = {
@@ -78,44 +79,12 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
 
     private _renderContent() {
 
-        if (!this.props.thesis || this.props.thesis.insiders.length === 0) {
-            return (<div
-                style={this.props.contentStyle}
-                className={this._bulletStyle.content}
-            >
-                {this.props.bullet.content}
-            </div>);
-        }
-
-        return (<div>
-            {this._renderInsiders()}
-            <div
-                style={this.props.contentStyle}
-                className={this._bulletStyle.content}
-            >
-                {this.props.bullet.content}
-            </div>
-        </div>);
-    }
-
-    private _renderInsiders() {
-
-        if (!this.props.thesis) {
-            return null;
-        }
-
-        if (!this.props.insiders) {
-            return null;
-        }
-
-        const insiders: string[] = this.props.thesis.insiders;
-
-        return (<div>
-            <Icon type="team" />
-            {insiders.map((name: string) =>
-                (<span className={this._bulletStyle.username}> @{name} </span>),
-            )}
-        </div>);
+        return (<RonpaContent
+            style={this.props.contentStyle}
+            content={this.props.bullet.content}
+            thesis={this.props.thesis}
+            insiders={this.props.insiders}
+        />);
     }
 
     private _renderEditor() {
