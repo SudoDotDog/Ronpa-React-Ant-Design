@@ -31,9 +31,9 @@ export const createMockLongContentBullet = (username?: string) => {
         id: chance.string(),
         content: `${chance.paragraph({
             sentences: 16,
-        })}\n${chance.paragraph({
+        })}\n\n${chance.paragraph({
             sentences: 16,
-        })}\n${chance.paragraph({
+        })}\n\t${chance.paragraph({
             sentences: 16,
         })}`,
         at: new Date(),

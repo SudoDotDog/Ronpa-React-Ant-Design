@@ -81,6 +81,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
         if (!this.props.thesis || this.props.thesis.insiders.length === 0) {
             return (<div
                 style={this.props.contentStyle}
+                className={this._bulletStyle.content}
             >
                 {this.props.bullet.content}
             </div>);
@@ -90,6 +91,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             {this._renderInsiders()}
             <div
                 style={this.props.contentStyle}
+                className={this._bulletStyle.content}
             >
                 {this.props.bullet.content}
             </div>
