@@ -9,6 +9,7 @@ import { Register } from "@sudoo/jss";
 Register.register();
 
 export * from "./components/bullet";
+export * from "./components/content";
 export * from "./components/editor";
 export * from "./components/ronpa";
 export * from "./components/static";
