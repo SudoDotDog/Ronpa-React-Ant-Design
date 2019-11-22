@@ -14,6 +14,10 @@ const contentStyleBase: JSSStyle = {
     username: {
         color: 'blue',
     },
+    outer: {
+        transition: '0.3s all',
+        overflow: 'hidden',
+    },
     restButton: {
         userSelect: 'none',
         cursor: 'pointer',

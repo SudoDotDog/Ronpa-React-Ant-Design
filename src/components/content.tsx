@@ -26,6 +26,7 @@ export type RonpaContentProps = {
 export type RonpaContentStates = {
 
     readonly expended: boolean;
+    readonly maxHeight: number;
 };
 
 export class RonpaContent extends React.Component<RonpaContentProps, RonpaContentStates> {
@@ -33,16 +34,33 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
     public readonly state: RonpaContentStates = {
 
         expended: false,
+        maxHeight: 0,
     };
 
     private readonly _contentStyle = contentStyle.use();
+    private _div: HTMLDivElement | null = null;
 
     public constructor(props: RonpaContentProps) {
 
         super(props);
+
+        this._expendContent = this._expendContent.bind(this);
     }
 
     public render() {
+
+        return (<div
+            ref={(ref: HTMLDivElement) => this._div = ref}
+            className={this._contentStyle.outer}
+            style={{
+                maxHeight: this.state.maxHeight === 0 ? 'none' : this.state.maxHeight,
+            }}
+        >
+            {this._renderMain()}
+        </div>);
+    }
+
+    private _renderMain() {
 
         if (!this.props.thesis || this.props.thesis.insiders.length === 0) {
             return (<div
@@ -56,7 +74,7 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
             </div>);
         }
 
-        return (<div>
+        return (<React.Fragment>
             {this._renderInsiders(this.props.thesis.insiders)}
             <div
                 style={this.props.style}
@@ -67,7 +85,7 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
             >
                 {this._renderContent()}
             </div>
-        </div>);
+        </React.Fragment>);
     }
 
     private _renderContent() {
@@ -78,14 +96,11 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
 
         if (this.props.content.length > this.props.contentLimit) {
 
-            return (<div
-            >
+            return (<div>
                 <div>{this.props.content.substring(0, this.props.contentLimit) + '...'}</div>
                 <a
                     className={this._contentStyle.restButton}
-                    onClick={() => this.setState({
-                        expended: true,
-                    })}
+                    onClick={this._expendContent}
                 >
                     Rest {this.props.content.length - this.props.contentLimit} Characters...
                 </a>
@@ -93,6 +108,27 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
         }
 
         return this.props.content;
+    }
+
+    private _expendContent() {
+
+        if (!this._div) {
+            return;
+        }
+
+        this.setState({
+            expended: true,
+            maxHeight: this._div.scrollHeight,
+        }, () => {
+
+            if (!this._div) {
+                return;
+            }
+
+            this.setState({
+                maxHeight: this._div.scrollHeight,
+            });
+        });
     }
 
     private _renderInsiders(insiders: string[]) {
