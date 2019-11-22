@@ -14,6 +14,16 @@ const contentStyleBase: JSSStyle = {
     username: {
         color: 'blue',
     },
+    restButton: {
+        userSelect: 'none',
+        cursor: 'pointer',
+        color: 'blue',
+        textDecoration: 'none',
+
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+    },
 };
 
 export const contentStyle: StyleManager = StyleManager.create(contentStyleBase, 'Content').setPrefix('Ronpa-React-Ant-Design-');

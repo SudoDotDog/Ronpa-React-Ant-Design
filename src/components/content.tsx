@@ -72,15 +72,23 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
 
     private _renderContent() {
 
-        if (!this.props.contentLimit) {
+        if (!this.props.contentLimit || this.state.expended) {
             return this.props.content;
         }
 
         if (this.props.content.length > this.props.contentLimit) {
 
-            return (<div>
+            return (<div
+            >
                 <div>{this.props.content.substring(0, this.props.contentLimit) + '...'}</div>
-                <div>Rest {this.props.content.length - this.props.contentLimit}</div>
+                <a
+                    className={this._contentStyle.restButton}
+                    onClick={() => this.setState({
+                        expended: true,
+                    })}
+                >
+                    Rest {this.props.content.length - this.props.contentLimit} Characters...
+                </a>
             </div>);
         }
 
