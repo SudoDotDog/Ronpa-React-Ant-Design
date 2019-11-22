@@ -29,6 +29,7 @@ export type RonpaBulletProps = {
 
     readonly insiders?: boolean;
     readonly repliable?: boolean;
+    readonly contentLimit?: number;
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
@@ -84,6 +85,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             content={this.props.bullet.content}
             thesis={this.props.thesis}
             insiders={this.props.insiders}
+            contentLimit={this.props.contentLimit}
         />);
     }
 

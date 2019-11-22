@@ -20,6 +20,7 @@ export type RonpaContentProps = {
     readonly thesis?: Thesis;
 
     readonly insiders?: boolean;
+    readonly contentLimit?: number;
 };
 
 export type RonpaContentStates = {
@@ -51,7 +52,7 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
                     this._contentStyle.content,
                 )}
             >
-                {this.props.content}
+                {this._renderContent()}
             </div>);
         }
 
@@ -64,9 +65,26 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
                     this._contentStyle.content,
                 )}
             >
-                {this.props.content}
+                {this._renderContent()}
             </div>
         </div>);
+    }
+
+    private _renderContent() {
+
+        if (!this.props.contentLimit) {
+            return this.props.content;
+        }
+
+        if (this.props.content.length > this.props.contentLimit) {
+
+            return (<div>
+                <div>{this.props.content.substring(0, this.props.contentLimit) + '...'}</div>
+                <div>Rest {this.props.content.length - this.props.contentLimit}</div>
+            </div>);
+        }
+
+        return this.props.content;
     }
 
     private _renderInsiders(insiders: string[]) {

@@ -23,6 +23,7 @@ export type RonpaCommentsProps = {
 
     readonly insiders?: boolean;
     readonly repliable?: boolean;
+    readonly contentLimit?: number;
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
@@ -66,6 +67,7 @@ export class RonpaComments extends React.Component<RonpaCommentsProps> {
 
             insiders={this.props.insiders}
             repliable={this.props.repliable}
+            contentLimit={this.props.contentLimit}
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
