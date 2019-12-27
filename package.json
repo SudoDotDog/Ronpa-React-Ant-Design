@@ -23,7 +23,8 @@
     "ronpa": "*"
   },
   "dependencies": {
-    "@sudoo/jss": "^1.3.1"
+    "@sudoo/jss": "^1.3.1",
+    "react-dropzone": "^10.2.1"
   },
   "devDependencies": {
     "@sudoo/io": "^1.6.1",
