@@ -1,0 +1,32 @@
+---
+name: Action
+---
+
+import { Playground } from "docz";
+import { createMockRonpa } from "./mock/ronpa"
+import { RonpaComments } from "../src/index";
+
+# Action
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.4/dist/antd.min.css" rel="stylesheet" />
+
+## Common
+
+<Playground>
+  <RonpaComments 
+    contentStyle={{
+      fontStyle: 'italic',
+    }}
+    username="Jack"
+    onChange={console.log}
+    ronpa={createMockRonpa("Jack")}
+    repliable
+    reactions={[{
+      name: 'like',
+      text: '👍',
+    }, {
+      name: 'love',
+      text: '😍',
+    }]}
+  />
+</Playground>
