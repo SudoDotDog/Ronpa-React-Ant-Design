@@ -4,7 +4,7 @@
  * @description Static Editor
  */
 
-import { assertIfTrue, mergeClasses } from "@sudoo/jss";
+import { assertIfTri, assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Button, Comment, Icon, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
@@ -85,30 +85,42 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
 
     private _renderFileTextArea() {
 
-        return (<div>
-            <div>
-                <Input.TextArea
-                    value={this.state.content}
-                    autoSize={{
-                        minRows: 2,
-                        maxRows: 6,
-                    }}
-                    className={mergeClasses(
-                        this._editorStyle.textAreaWithDrop,
-                    )}
-                    onChange={(value: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({
-                        content: value.target.value,
-                    })}
-                />
-                <Button
-                    type="ghost"
-                    block
-                    className={mergeClasses(
-                        this._editorStyle.uploadIndicator,
-                    )}>
-                    <Icon type="paper-clip" />
-                    Drag or Click
-                </Button>
+        return (<div
+            className={this._editorStyle.draggable}
+            onDragEnter={() => this.setState({ dragHover: true })}
+            onDragLeave={() => this.setState({ dragHover: false })}
+        >
+            <Input.TextArea
+                draggable={false}
+                value={this.state.content}
+                autoSize={{
+                    minRows: 2,
+                    maxRows: 6,
+                }}
+                className={mergeClasses(
+                    this._editorStyle.textAreaWithDrop,
+                )}
+                onChange={(value: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({
+                    content: value.target.value,
+                })}
+            />
+            <Button
+                type="ghost"
+                block
+                className={mergeClasses(
+                    this._editorStyle.uploadIndicator,
+                )}>
+                <Icon type="paper-clip" />
+                Drag or Click
+            </Button>
+            <div
+                className={mergeClasses(
+                    this._editorStyle.dragContent,
+                    assertIfTri(this.state.dragHover, this._editorStyle.dragging, this._editorStyle.notDragging),
+                )}
+            >
+                <Icon type="paper-clip" />&nbsp;
+                Release to Upload
             </div>
         </div>);
     }
