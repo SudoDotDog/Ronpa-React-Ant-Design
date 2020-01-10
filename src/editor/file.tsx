@@ -70,8 +70,9 @@ export class RonpaFileEditor extends React.Component<RonpaFileEditorProps, Ronpa
                             {...state.getRootProps({
                                 className: this._editorStyle.draggable,
                             })}
-
+                            onClick={(e: React.MouseEvent) => e.preventDefault()}
                         >
+                            <input {...state.getInputProps()} />
                             <Input.TextArea
                                 draggable={false}
                                 value={this.state.content}
