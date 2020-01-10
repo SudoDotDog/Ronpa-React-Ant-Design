@@ -107,8 +107,8 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
                         draggable={false}
                         value={this.state.content}
                         autoSize={{
-                            minRows: 2,
-                            maxRows: 6,
+                            minRows: 3,
+                            maxRows: 8,
                         }}
                         className={mergeClasses(
                             this._editorStyle.textAreaWithDrop,
@@ -122,7 +122,9 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
                         block
                         className={mergeClasses(
                             this._editorStyle.uploadIndicator,
-                        )}>
+                        )}
+                        onClick={state.open}
+                    >
                         <Icon type="paper-clip" />
                         Drag or Click
                     </Button>

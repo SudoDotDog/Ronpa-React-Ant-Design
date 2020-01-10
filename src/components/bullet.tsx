@@ -9,10 +9,10 @@ import { Comment } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftAddReplyChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
+import { RonpaEditor } from "../editor/editor";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
 import { RonpaContent } from "./content";
-import { RonpaEditor } from "./editor";
 
 export type RonpaBulletProps = {
 
