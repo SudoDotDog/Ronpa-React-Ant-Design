@@ -5,6 +5,7 @@
  */
 
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
+import { Classes } from "jss";
 import * as React from "react";
 import { editorStyle } from "../style/editor";
 import { RonpaStaticEditor, RonpaStaticEditorProps } from "./static";
@@ -16,7 +17,7 @@ export type RonpaEditorProps = {
 
 export class RonpaEditor extends React.Component<RonpaEditorProps> {
 
-    private readonly _editorStyle = editorStyle.use();
+    private readonly _editorStyle: Classes = editorStyle.use();
 
     public constructor(props: RonpaEditorProps) {
 
