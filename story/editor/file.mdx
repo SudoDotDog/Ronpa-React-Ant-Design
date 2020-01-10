@@ -1,0 +1,22 @@
+---
+menu: Editor
+name: File
+---
+
+import { Playground } from "docz";
+import { createMockRonpa } from "../mock/ronpa"
+import { RonpaFileEditor } from "../../src/index";
+
+# File Editor
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+## Simple
+
+<Playground>
+  <RonpaFileEditor 
+    username="Jack"
+    onSubmit={console.log}
+    allowFile
+  />
+</Playground>

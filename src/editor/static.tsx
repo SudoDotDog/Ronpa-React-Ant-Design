@@ -4,11 +4,10 @@
  * @description Static Editor
  */
 
-import { assertIfTri, assertIfTrue, mergeClasses } from "@sudoo/jss";
-import { Button, Comment, Icon, Input } from "antd";
+import { assertIfTrue, mergeClasses } from "@sudoo/jss";
+import { Button, Comment, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
-import Dropzone, { DropzoneState } from "react-dropzone";
 import { editorStyle } from "../style/editor";
 
 export type RonpaStaticEditorProps = {
@@ -20,14 +19,11 @@ export type RonpaStaticEditorProps = {
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
     readonly onSubmit?: (content: string) => void;
-
-    readonly allowFile?: boolean;
 };
 
 export type RonpaStaticEditorStates = {
 
     readonly content: string;
-    readonly dragHover: boolean;
 };
 
 export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, RonpaStaticEditorStates> {
@@ -35,7 +31,6 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
     public readonly state: RonpaStaticEditorStates = {
 
         content: '',
-        dragHover: false,
     };
 
     private readonly _editorStyle: Classes = editorStyle.use();
@@ -57,7 +52,16 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
             style={this.props.style}
             avatar={this._getAvatar(this.props.username)}
             content={<div>
-                {this.props.allowFile ? this._renderFileTextArea() : this._renderBasicTextArea()}
+                <Input.TextArea
+                    value={this.state.content}
+                    autoSize={{
+                        minRows: 2,
+                        maxRows: 6,
+                    }}
+                    onChange={(value: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({
+                        content: value.target.value,
+                    })}
+                />
                 <Button
                     className={this._editorStyle.submitButton}
                     type="primary"
@@ -65,83 +69,6 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
                 >Submit</Button>
             </div>}
         />);
-    }
-
-    private _renderBasicTextArea() {
-
-        return (<Input.TextArea
-            value={this.state.content}
-            autoSize={{
-                minRows: 2,
-                maxRows: 6,
-            }}
-            className={mergeClasses(
-                assertIfTrue(this.props.allowFile, this._editorStyle.textAreaWithDrop),
-            )}
-            onChange={(value: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({
-                content: value.target.value,
-            })}
-        />);
-    }
-
-    private _renderFileTextArea() {
-
-        return (<Dropzone
-            onDragEnter={() => this.setState({ dragHover: true })}
-            onDragLeave={() => this.setState({ dragHover: false })}
-            onDrop={(files: File[]) => {
-                this.setState({
-                    dragHover: false,
-                });
-                console.log(files);
-            }}
-        >
-            {(state: DropzoneState) => {
-                return (<div
-                    {...state.getRootProps({
-                        className: this._editorStyle.draggable,
-                    })}
-
-                >
-                    <Input.TextArea
-                        draggable={false}
-                        value={this.state.content}
-                        autoSize={{
-                            minRows: 3,
-                            maxRows: 8,
-                        }}
-                        className={mergeClasses(
-                            this._editorStyle.textAreaWithDrop,
-                        )}
-                        onChange={(value: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({
-                            content: value.target.value,
-                        })}
-                    />
-                    <Button
-                        type="ghost"
-                        block
-                        className={mergeClasses(
-                            this._editorStyle.uploadIndicator,
-                        )}
-                        onClick={state.open}
-                    >
-                        <Icon type="paper-clip" />
-                        Drag or Click
-                    </Button>
-                    <div
-                        {...state.getRootProps({
-                            className: mergeClasses(
-                                this._editorStyle.dragContent,
-                                assertIfTri(this.state.dragHover, this._editorStyle.dragging, this._editorStyle.notDragging),
-                            ),
-                        })}
-                    >
-                        <Icon type="paper-clip" />&nbsp;
-                        Release to Upload
-                    </div>
-                </div>);
-            }}
-        </Dropzone>);
     }
 
     private _submitChange() {
