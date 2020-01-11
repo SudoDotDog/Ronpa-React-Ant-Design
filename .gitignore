@@ -21,6 +21,9 @@ coverage
 app
 .docz
 
+# Lockfile
+yarn.lock
+
 # nyc test coverage
 .nyc_output
 
