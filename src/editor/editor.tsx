@@ -35,9 +35,13 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
                 assertIfTri(this.props.visible, this._editorStyle.visible, this._editorStyle.invisible),
             )}
 
+            insiders={this.props.insiders}
+            story={this.props.story}
+            reply={this.props.reply}
+
             username={this.props.username}
             getAvatar={this.props.getAvatar}
-            onSubmit={this.props.onSubmit}
+            onAction={this.props.onAction}
         />);
     }
 }
