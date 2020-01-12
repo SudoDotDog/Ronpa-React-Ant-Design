@@ -1,32 +1,22 @@
 /**
  * @author WMXPY
- * @namespace React_Ant_Design
+ * @namespace React_Ant_Design_Editor
  * @description Static Editor
  */
 
-import { assertIfTrue, mergeClasses } from "@sudoo/jss";
+import { mergeClasses } from "@sudoo/jss";
 import { Button, Comment, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
 import { editorStyle } from "../style/editor";
-
-export type RonpaStaticEditorProps = {
-
-    readonly style?: React.CSSProperties;
-    readonly className?: string;
-
-    readonly username: string;
-
-    readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly onSubmit?: (content: string) => void;
-};
+import { RonpaEditorBaseProps } from "./type";
 
 export type RonpaStaticEditorStates = {
 
     readonly content: string;
 };
 
-export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, RonpaStaticEditorStates> {
+export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, RonpaStaticEditorStates> {
 
     public readonly state: RonpaStaticEditorStates = {
 
@@ -35,7 +25,7 @@ export class RonpaStaticEditor extends React.Component<RonpaStaticEditorProps, R
 
     private readonly _editorStyle: Classes = editorStyle.use();
 
-    public constructor(props: RonpaStaticEditorProps) {
+    public constructor(props: RonpaEditorBaseProps) {
 
         super(props);
 

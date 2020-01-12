@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace React_Ant_Design
+ * @namespace React_Ant_Design_Editor
  * @description Editor
  */
 
@@ -8,12 +8,13 @@ import { assertIfTri, mergeClasses } from "@sudoo/jss";
 import { Classes } from "jss";
 import * as React from "react";
 import { editorStyle } from "../style/editor";
-import { RonpaStaticEditor, RonpaStaticEditorProps } from "./static";
+import { RonpaStaticEditor } from "./static";
+import { RonpaEditorBaseProps } from "./type";
 
 export type RonpaEditorProps = {
 
     readonly visible: boolean;
-} & RonpaStaticEditorProps;
+} & RonpaEditorBaseProps;
 
 export class RonpaEditor extends React.Component<RonpaEditorProps> {
 

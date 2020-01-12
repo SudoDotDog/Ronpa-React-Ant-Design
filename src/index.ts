@@ -16,5 +16,6 @@ export * from "./declare";
 export * from "./editor/editor";
 export * from "./editor/file";
 export * from "./editor/static";
+export * from "./editor/type";
 export * from "./util";
 

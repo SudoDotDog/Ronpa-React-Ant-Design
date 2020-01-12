@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace React_Ant_Design
+ * @namespace React_Ant_Design_Editor
  * @description Static Editor
  */
 
@@ -10,17 +10,7 @@ import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
 import { editorStyle } from "../style/editor";
-
-export type RonpaFileEditorProps = {
-
-    readonly style?: React.CSSProperties;
-    readonly className?: string;
-
-    readonly username: string;
-
-    readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly onSubmit?: (content: string) => void;
-};
+import { RonpaEditorBaseProps } from "./type";
 
 export type RonpaFileEditorStates = {
 
@@ -28,7 +18,7 @@ export type RonpaFileEditorStates = {
     readonly dragHover: boolean;
 };
 
-export class RonpaFileEditor extends React.Component<RonpaFileEditorProps, RonpaFileEditorStates> {
+export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, RonpaFileEditorStates> {
 
     public readonly state: RonpaFileEditorStates = {
 
@@ -38,7 +28,7 @@ export class RonpaFileEditor extends React.Component<RonpaFileEditorProps, Ronpa
 
     private readonly _editorStyle: Classes = editorStyle.use();
 
-    public constructor(props: RonpaFileEditorProps) {
+    public constructor(props: RonpaEditorBaseProps) {
 
         super(props);
 
