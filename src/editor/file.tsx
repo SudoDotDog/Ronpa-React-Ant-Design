@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design_Editor
- * @description Static Editor
+ * @description File Editor
  */
 
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
@@ -9,6 +9,7 @@ import { Button, Comment, Icon, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
+import { ChangeType, draftAddReplyChange, draftAddThesisChange, RECORD_TYPE } from "ronpa";
 import { editorStyle } from "../style/editor";
 import { RonpaEditorBaseProps } from "./type";
 
@@ -32,7 +33,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
 
         super(props);
 
-        this._submitChange = this._submitChange.bind(this);
+        this._emitTextAction = this._emitTextAction.bind(this);
     }
 
     public render() {
@@ -105,18 +106,39 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
                 <Button
                     className={this._editorStyle.submitButton}
                     type="primary"
-                    onClick={this._submitChange}
+                    onClick={this._emitTextAction}
                 >Submit</Button>
             </div>}
         />);
     }
 
-    private _submitChange() {
+    private _emitTextAction() {
 
-        if (this.props.onSubmit) {
-            this.props.onSubmit(this.state.content);
+        if (this.props.onAction) {
+            this.props.onAction(this._createTextAction());
         }
         return;
+    }
+
+    private _createTextAction(): ChangeType<any> {
+
+        if (this.props.story) {
+
+            return draftAddReplyChange({
+                by: this.props.username,
+                content: this.state.content,
+                story: this.props.story,
+                reply: this.props.reply,
+                type: RECORD_TYPE.TEXT,
+            });
+        }
+
+        return draftAddThesisChange({
+            by: this.props.username,
+            content: this.state.content,
+            insiders: this.props.insiders ?? [],
+            type: RECORD_TYPE.TEXT,
+        });
     }
 
     private _getAvatar(username: string): string | React.ReactNode | undefined {

@@ -63,9 +63,9 @@ export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, Ron
 
     private _submitChange() {
 
-        if (this.props.onSubmit) {
-            this.props.onSubmit(this.state.content);
-        }
+        // if (this.props.onSubmit) {
+        //     this.props.onSubmit(this.state.content);
+        // }
         return;
     }
 
