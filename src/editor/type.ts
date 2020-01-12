@@ -18,5 +18,5 @@ export type RonpaEditorBaseProps = {
     readonly reply?: string;
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly onAction?: (action: ChangeType<any>) => void;
+    readonly onAction?: (action: ChangeType<any, any>) => void;
 };

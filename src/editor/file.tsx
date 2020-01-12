@@ -9,7 +9,7 @@ import { Button, Comment, Icon, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
-import { ChangeType, draftAddReplyChange, draftAddThesisChange, RECORD_TYPE } from "ronpa";
+import { ChangeType, draftAddReplyChange, draftAddThesisChange, FileContent, RECORD_TYPE } from "ronpa";
 import { editorStyle } from "../style/editor";
 import { RonpaEditorBaseProps } from "./type";
 
@@ -53,7 +53,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
                         this.setState({
                             dragHover: false,
                         });
-                        console.log(files);
+                        this._emitFileAction(files);
                     }}
                 >
                     {(state: DropzoneState) => {
@@ -120,7 +120,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
         return;
     }
 
-    private _createTextAction(): ChangeType<any> {
+    private _createTextAction(): ChangeType<any, RECORD_TYPE.TEXT> {
 
         if (this.props.story) {
 
@@ -138,6 +138,41 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
             content: this.state.content,
             insiders: this.props.insiders ?? [],
             type: RECORD_TYPE.TEXT,
+        });
+    }
+
+    private _emitFileAction(files: File[]) {
+
+        if (this.props.onAction) {
+
+            const fileContents: FileContent[] = files.map((file: File) => ({
+                path: file.name,
+                originalName: file.name,
+                mimeType: file.type,
+            } as FileContent));
+            this.props.onAction(this._createFileAction(fileContents));
+        }
+        return;
+    }
+
+    private _createFileAction(fileContents: FileContent[]): ChangeType<any, RECORD_TYPE.FILE> {
+
+        if (this.props.story) {
+
+            return draftAddReplyChange({
+                by: this.props.username,
+                content: fileContents,
+                story: this.props.story,
+                reply: this.props.reply,
+                type: RECORD_TYPE.FILE,
+            });
+        }
+
+        return draftAddThesisChange({
+            by: this.props.username,
+            content: fileContents,
+            insiders: this.props.insiders ?? [],
+            type: RECORD_TYPE.FILE,
         });
     }
 
