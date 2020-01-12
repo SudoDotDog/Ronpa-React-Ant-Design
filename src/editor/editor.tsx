@@ -32,7 +32,11 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             style={this.props.style}
             className={mergeClasses(
                 this.props.className,
-                assertIfTri(this.props.visible, this._editorStyle.visible, this._editorStyle.invisible),
+                assertIfTri(
+                    this.props.visible,
+                    this._editorStyle.visible,
+                    this._editorStyle.invisible,
+                ),
             )}
 
             username={this.props.username}

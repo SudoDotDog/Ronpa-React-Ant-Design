@@ -137,7 +137,10 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
                 return (<span
                     onClick={clickFunction}
                     className={mergeClasses(
-                        assertIfTrue(active, this._bulletStyle.activeReaction),
+                        assertIfTrue(
+                            active,
+                            this._bulletStyle.activeReaction,
+                        ),
                     )}
                     key={`reaction-${reaction.name}`}
                 >{reaction.text} {count}</span>);

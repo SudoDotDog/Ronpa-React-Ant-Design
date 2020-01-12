@@ -93,7 +93,11 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
                                 {...state.getRootProps({
                                     className: mergeClasses(
                                         this._editorStyle.dragContent,
-                                        assertIfTri(this.state.dragHover, this._editorStyle.dragging, this._editorStyle.notDragging),
+                                        assertIfTri(
+                                            this.state.dragHover,
+                                            this._editorStyle.dragging,
+                                            this._editorStyle.notDragging,
+                                        ),
                                     ),
                                 })}
                             >
