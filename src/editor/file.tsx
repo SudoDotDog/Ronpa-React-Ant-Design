@@ -11,7 +11,7 @@ import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
 import { ChangeType, draftAddReplyChange, draftAddThesisChange, FileContent, RECORD_TYPE } from "ronpa";
 import { editorStyle } from "../style/editor";
-import { RonpaEditorBaseProps } from "./type";
+import { RonpaEditorBaseProps, RonpaEditorUploadResult } from "./type";
 
 export type RonpaFileEditorStates = {
 
@@ -141,15 +141,25 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
         });
     }
 
-    private _emitFileAction(files: File[]) {
+    private async _emitFileAction(files: File[]) {
+
+        if (!this.props.uploadFile) {
+            throw new Error('[Ronpa-React-Ant-Design] Upload File Required');
+        }
 
         if (this.props.onAction) {
 
-            const fileContents: FileContent[] = files.map((file: File) => ({
-                path: file.name,
-                originalName: file.name,
-                mimeType: file.type,
-            } as FileContent));
+            const fileContents: FileContent[] = [];
+            for (const file of files) {
+                const result: RonpaEditorUploadResult = await this.props.uploadFile(file);
+                fileContents.push({
+                    path: result.path,
+                    originalName: file.name,
+                    mimeType: file.type,
+                    lastModifyAt: new Date(file.lastModified),
+                    uploadedAt: result.uploadedAt,
+                });
+            }
             this.props.onAction(this._createFileAction(fileContents));
         }
         return;

@@ -4,7 +4,14 @@
  * @description Type
  */
 
-import { ChangeType, RONPA_ACTION } from "ronpa";
+import { ChangeType } from "ronpa";
+
+export type RonpaEditorUploadResult = {
+
+    readonly path: string;
+
+    readonly uploadedAt?: Date;
+};
 
 export type RonpaEditorBaseProps = {
 
@@ -18,5 +25,6 @@ export type RonpaEditorBaseProps = {
     readonly reply?: string;
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: (action: ChangeType<any, any>) => void;
 };
