@@ -8,12 +8,12 @@ import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Thesis } from "ronpa";
+import { RonpaContent } from "../content/content";
 import { ReactionPropsConfig } from "../declare";
 import { RonpaEditor } from "../editor/editor";
 import { EditorMode, RonpaEditorUploadResult } from "../editor/type";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
-import { RonpaContent } from "./content";
 
 export type RonpaBulletProps = {
 
@@ -99,7 +99,6 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
         }
 
         return (<RonpaEditor
-
             username={this.props.username}
             visible={this.state.replying}
             getAvatar={this.props.getAvatar}
