@@ -57,6 +57,7 @@ export class RonpaTextContent extends React.Component<RonpaTextContentProps, Ron
                 contentLimit={this.props.contentLimit}
             >
                 {this._renderContent()}
+                {this.props.children}
             </RonpaBaseContent>
         </div>);
     }

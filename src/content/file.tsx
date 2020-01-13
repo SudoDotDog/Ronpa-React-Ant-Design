@@ -29,24 +29,20 @@ export class RonpaFileContent extends React.Component<RonpaFileContentProps> {
 
     public render() {
 
-        return (<div
-            className={this._contentStyle.outer}
+        return (<RonpaBaseContent
+            style={this.props.style}
+            className={this.props.className}
+            thesis={this.props.thesis}
+            insiders={this.props.insiders}
+            contentLimit={this.props.contentLimit}
         >
-            <RonpaBaseContent
-                style={this.props.style}
-                className={this.props.className}
-                thesis={this.props.thesis}
-                insiders={this.props.insiders}
-                contentLimit={this.props.contentLimit}
+            <List
+                className={this._contentStyle.list}
+                bordered
             >
-                <List
-                    className={this._contentStyle.list}
-                    bordered
-                >
-                    {this.props.content.map(this._renderFile)}
-                </List>
-            </RonpaBaseContent>
-        </div>);
+                {this.props.content.map(this._renderFile)}
+            </List>
+        </RonpaBaseContent>);
     }
 
     private _renderFile(file: FileContent) {
@@ -59,10 +55,12 @@ export class RonpaFileContent extends React.Component<RonpaFileContentProps> {
         >
             <List.Item.Meta
                 avatar={<Avatar shape="square">
-                    <Icon type="file-text" theme="filled" />
+                    <Icon type="file-text" theme="filled" style={{
+                        fontSize: '15px',
+                    }} />
                 </Avatar>}
                 title={file.originalName}
-                description={file.mimeType}
+                description={file.size}
             />
         </List.Item>);
     }
