@@ -5,7 +5,7 @@
  */
 
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
-import { Button, Comment, Icon, Input } from "antd";
+import { Button, Comment, Icon, Input, Tag } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
@@ -16,6 +16,7 @@ import { RonpaEditorBaseProps, RonpaEditorUploadResult } from "./type";
 export type RonpaAttachmentEditorStates = {
 
     readonly content: string;
+    readonly files: FileContent[];
     readonly dragHover: boolean;
 };
 
@@ -24,6 +25,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
     public readonly state: RonpaAttachmentEditorStates = {
 
         content: '',
+        files: [],
         dragHover: false,
     };
 
@@ -78,6 +80,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                                     content: value.target.value,
                                 })}
                             />
+                            {this._renderFiles()}
                             <Button
                                 type="ghost"
                                 block
@@ -114,6 +117,19 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                 >Submit</Button>
             </div>}
         />);
+    }
+
+    private _renderFiles() {
+
+        if (this.state.files.length !== 0) {
+            return null;
+        }
+
+        return (<div className={this._editorStyle.attachmentContainer}>
+            <Tag
+                closable
+            >123</Tag>
+        </div>);
     }
 
     private _emitTextAction() {
