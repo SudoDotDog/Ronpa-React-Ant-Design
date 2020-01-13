@@ -5,6 +5,7 @@
  */
 
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
+import { randomUnique } from "@sudoo/random";
 import { Button, Comment, Icon, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
@@ -157,6 +158,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
             for (const file of files) {
                 const result: RonpaEditorUploadResult = await this.props.uploadFile(file);
                 fileContents.push({
+                    id: randomUnique(),
                     path: result.path,
                     originalName: file.name,
                     mimeType: file.type,

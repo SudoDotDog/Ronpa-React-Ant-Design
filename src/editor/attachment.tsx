@@ -5,6 +5,7 @@
  */
 
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
+import { randomUnique } from "@sudoo/random";
 import { Button, Comment, Icon, Input, Tag } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
@@ -35,7 +36,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
         super(props);
 
-        this._emitTextAction = this._emitTextAction.bind(this);
+        this._emitAction = this._emitAction.bind(this);
     }
 
     public render() {
@@ -55,7 +56,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                         this.setState({
                             dragHover: false,
                         });
-                        this._emitFileAction(files);
+                        this._uploadFile(files);
                     }}
                 >
                     {(state: DropzoneState) => {
@@ -113,7 +114,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                 <Button
                     className={this._editorStyle.submitButton}
                     type="primary"
-                    onClick={this._emitTextAction}
+                    onClick={this._emitAction}
                 >Submit</Button>
             </div>}
         />);
@@ -121,21 +122,33 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
     private _renderFiles() {
 
-        if (this.state.files.length !== 0) {
+        if (this.state.files.length === 0) {
             return null;
         }
 
         return (<div className={this._editorStyle.attachmentContainer}>
-            <Tag
+            {this.state.files.map((file: FileContent) => <Tag
+                key={file.id}
                 closable
-            >123</Tag>
+                onClose={(e: Event) => {
+                    e.preventDefault();
+                    this.setState({
+                        files: this.state.files.filter((current: FileContent) => current.id !== file.id),
+                    });
+                }}
+            >{file.originalName}</Tag>)}
         </div>);
     }
 
-    private _emitTextAction() {
+    private _emitAction() {
 
         if (this.props.onAction) {
-            this.props.onAction(this._createTextAction());
+
+            if (this.state.files.length === 0) {
+                this.props.onAction(this._createTextAction());
+            } else {
+                this.props.onAction(this._createAttachmentAction());
+            }
         }
         return;
     }
@@ -161,49 +174,57 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
         });
     }
 
-    private async _emitFileAction(files: File[]) {
+    private async _uploadFile(files: File[]) {
 
         if (!this.props.uploadFile) {
             throw new Error('[Ronpa-React-Ant-Design] Upload File Required');
         }
 
-        if (this.props.onAction) {
-
-            const fileContents: FileContent[] = [];
-            for (const file of files) {
-                const result: RonpaEditorUploadResult = await this.props.uploadFile(file);
-                fileContents.push({
-                    path: result.path,
-                    originalName: file.name,
-                    mimeType: file.type,
-                    size: file.size,
-                    lastModifyAt: new Date(file.lastModified),
-                    uploadedAt: result.uploadedAt,
-                });
-            }
-            this.props.onAction(this._createFileAction(fileContents));
+        const fileContents: FileContent[] = [];
+        for (const file of files) {
+            const result: RonpaEditorUploadResult = await this.props.uploadFile(file);
+            fileContents.push({
+                id: randomUnique(),
+                path: result.path,
+                originalName: file.name,
+                mimeType: file.type,
+                size: file.size,
+                lastModifyAt: new Date(file.lastModified),
+                uploadedAt: result.uploadedAt,
+            });
         }
-        return;
+        this.setState({
+            files: [
+                ...this.state.files,
+                ...fileContents,
+            ],
+        });
     }
 
-    private _createFileAction(fileContents: FileContent[]): ChangeType<any, RECORD_TYPE.FILE> {
+    private _createAttachmentAction(): ChangeType<any, RECORD_TYPE.ATTACHMENT> {
 
         if (this.props.story) {
 
             return draftAddReplyChange({
                 by: this.props.username,
-                content: fileContents,
+                content: {
+                    text: this.state.content,
+                    files: this.state.files,
+                },
                 story: this.props.story,
                 reply: this.props.reply,
-                type: RECORD_TYPE.FILE,
+                type: RECORD_TYPE.ATTACHMENT,
             });
         }
 
         return draftAddThesisChange({
             by: this.props.username,
-            content: fileContents,
+            content: {
+                text: this.state.content,
+                files: this.state.files,
+            },
             insiders: this.props.insiders ?? [],
-            type: RECORD_TYPE.FILE,
+            type: RECORD_TYPE.ATTACHMENT,
         });
     }
 
