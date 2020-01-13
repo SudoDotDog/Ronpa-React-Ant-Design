@@ -7,7 +7,7 @@
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, draftAddReactionChange, draftAddReplyChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
+import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Thesis } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { RonpaEditor } from "../editor/editor";
 import { bulletStyle } from "../style/bullet";
@@ -33,7 +33,7 @@ export type RonpaBulletProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
+    readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
 };
 
 export type RonpaBulletStates = {
@@ -106,8 +106,8 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
 
     private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
 
-        if (this.props.onChange) {
-            this.props.onChange(change);
+        if (this.props.onAction) {
+            this.props.onAction(change);
         }
         return;
     }

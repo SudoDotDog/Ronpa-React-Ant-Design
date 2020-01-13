@@ -27,7 +27,7 @@ export type RonpaStoryProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly onChange?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
+    readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
 };
 
 export class RonpaStory extends React.Component<RonpaStoryProps> {
@@ -66,7 +66,7 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
-            onChange={this._emitChange}
+            onAction={this._emitChange}
         >
             {story.bullets.map(this._renderBullets)}
         </RonpaBullet>);
@@ -89,14 +89,14 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
-            onChange={this._emitChange}
+            onAction={this._emitChange}
         />);
     }
 
     private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
 
-        if (this.props.onChange) {
-            this.props.onChange(change);
+        if (this.props.onAction) {
+            this.props.onAction(change);
         }
         return;
     }

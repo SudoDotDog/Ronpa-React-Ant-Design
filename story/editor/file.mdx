@@ -11,12 +11,24 @@ import { RonpaFileEditor } from "../../src/index";
 
 <link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
 
-## Simple
+## Thesis
 
 <Playground>
   <RonpaFileEditor 
     username="Jack"
-    onSubmit={console.log}
+    onAction={console.log}
+    allowFile
+  />
+</Playground>
+
+## Reply
+
+<Playground>
+  <RonpaFileEditor 
+    username="Jack"
+    onAction={console.log}
+    story="story"
+    reply="reply"
     allowFile
   />
 </Playground>

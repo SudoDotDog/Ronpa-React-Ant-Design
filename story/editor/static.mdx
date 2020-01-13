@@ -11,21 +11,22 @@ import { RonpaStaticEditor } from "../../src/index";
 
 <link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
 
-## Simple
+## Thesis
 
 <Playground>
   <RonpaStaticEditor 
     username="Jack"
-    onSubmit={console.log}
+    onAction={console.log}
   />
 </Playground>
 
-## Allow File
+## Reply
 
 <Playground>
   <RonpaStaticEditor 
     username="Jack"
-    onSubmit={console.log}
-    allowFile
+    story="story"
+    reply="reply"
+    onAction={console.log}
   />
 </Playground>
