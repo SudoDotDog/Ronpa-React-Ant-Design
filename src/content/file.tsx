@@ -4,6 +4,7 @@
  * @description File
  */
 
+import { Avatar, Icon, List } from "antd";
 import * as React from "react";
 import { ContentType, FileContent, RECORD_TYPE } from "ronpa";
 import { contentStyle } from "../style/content";
@@ -38,22 +39,31 @@ export class RonpaFileContent extends React.Component<RonpaFileContentProps> {
                 insiders={this.props.insiders}
                 contentLimit={this.props.contentLimit}
             >
-                {this._renderContent()}
+                <List
+                    className={this._contentStyle.list}
+                    bordered
+                >
+                    {this.props.content.map(this._renderFile)}
+                </List>
             </RonpaBaseContent>
-        </div>);
-    }
-
-    private _renderContent() {
-
-        return (<div>
-            <div>{this.props.content.map(this._renderFile)}</div>
         </div>);
     }
 
     private _renderFile(file: FileContent) {
 
-        return (<div key={file.id}>
-            {file.id}
-        </div>);
+        return (<List.Item
+            key={file.id}
+            actions={[
+                (<a onClick={() => window.open(file.path)}><Icon type="download" /> Download</a>),
+            ]}
+        >
+            <List.Item.Meta
+                avatar={<Avatar shape="square">
+                    <Icon type="file-text" theme="filled" />
+                </Avatar>}
+                title={file.originalName}
+                description={file.mimeType}
+            />
+        </List.Item>);
     }
 }

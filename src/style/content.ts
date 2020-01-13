@@ -18,6 +18,9 @@ const contentStyleBase: JSSStyle = {
         transition: '0.3s all',
         overflow: 'hidden',
     },
+    list: {
+        marginTop: '15px !important',
+    },
     restButton: {
         userSelect: 'none',
         cursor: 'pointer',
