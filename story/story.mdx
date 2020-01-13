@@ -15,7 +15,7 @@ import { RonpaStory } from "../src/index";
 <Playground>
   <RonpaStory 
     username="Jack"
-    onChange={console.log}
+    onAction={console.log}
     story={createMockStory()}
   />
 </Playground>
@@ -27,7 +27,7 @@ import { RonpaStory } from "../src/index";
     getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
     username="Jack"
     repliable
-    onChange={console.log}
+    onAction={console.log}
     story={createMockStory()}
   />
 </Playground>
@@ -38,7 +38,7 @@ import { RonpaStory } from "../src/index";
   <RonpaStory 
     getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
     username="Jack"
-    onChange={console.log}
+    onAction={console.log}
     reactions={[{
       name: 'like',
       text: '👍',
