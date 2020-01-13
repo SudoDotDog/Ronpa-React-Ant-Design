@@ -30,3 +30,29 @@ import { RonpaComments } from "../src/index";
     }]}
   />
 </Playground>
+
+## Attachment
+
+<Playground>
+  <RonpaComments 
+    contentStyle={{
+      fontStyle: 'italic',
+    }}
+    username="Jack"
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
+    editorMode={'attachment'}
+    onAction={console.log}
+    ronpa={createMockRonpa("Jack")}
+    repliable
+    reactions={[{
+      name: 'like',
+      text: '👍',
+    }, {
+      name: 'love',
+      text: '😍',
+    }]}
+  />
+</Playground>

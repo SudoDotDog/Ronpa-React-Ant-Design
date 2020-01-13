@@ -32,6 +32,23 @@ import { RonpaStory } from "../src/index";
   />
 </Playground>
 
+## Replible Attachment
+
+<Playground>
+  <RonpaStory 
+    getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
+    editorMode={'attachment'}
+    username="Jack"
+    repliable
+    onAction={console.log}
+    story={createMockStory()}
+  />
+</Playground>
+
 ## Reactions
 
 <Playground>
