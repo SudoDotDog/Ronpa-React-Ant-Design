@@ -136,7 +136,10 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
         return (<div>
             <Icon type="team" />
             {insiders.map((name: string) =>
-                (<span className={this._contentStyle.username}> @{name} </span>),
+                (<span
+                    key={name}
+                    className={this._contentStyle.username}
+                > @{name} </span>),
             )}
         </div>);
     }

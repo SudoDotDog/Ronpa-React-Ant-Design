@@ -16,8 +16,11 @@ import { RonpaFileEditor } from "../../src/index";
 <Playground>
   <RonpaFileEditor 
     username="Jack"
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
     onAction={console.log}
-    allowFile
   />
 </Playground>
 
@@ -26,9 +29,12 @@ import { RonpaFileEditor } from "../../src/index";
 <Playground>
   <RonpaFileEditor 
     username="Jack"
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
     onAction={console.log}
     story="story"
     reply="reply"
-    allowFile
   />
 </Playground>
