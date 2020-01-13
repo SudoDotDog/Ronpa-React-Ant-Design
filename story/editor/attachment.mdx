@@ -1,0 +1,40 @@
+---
+menu: Editor
+name: File
+---
+
+import { Playground } from "docz";
+import { createMockRonpa } from "../mock/ronpa"
+import { RonpaAttachmentEditor } from "../../src/index";
+
+# Attachment Editor
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+## Thesis
+
+<Playground>
+  <RonpaAttachmentEditor 
+    username="Jack"
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
+    onAction={console.log}
+  />
+</Playground>
+
+## Reply
+
+<Playground>
+  <RonpaAttachmentEditor 
+    username="Jack"
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
+    onAction={console.log}
+    story="story"
+    reply="reply"
+  />
+</Playground>
