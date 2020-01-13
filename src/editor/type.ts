@@ -28,3 +28,5 @@ export type RonpaEditorBaseProps = {
     readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: (action: ChangeType<any, any>) => void;
 };
+
+export type EditorMode = 'text' | 'file' | 'attachment';

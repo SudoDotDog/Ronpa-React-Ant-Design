@@ -8,6 +8,7 @@ import { mergeClasses } from "@sudoo/jss";
 import * as React from "react";
 import { ChangeType, Ronpa, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
+import { EditorMode, RonpaEditorUploadResult } from "../editor/type";
 import { ronpaStyle } from "../style/ronpa";
 import { RonpaStory } from "./story";
 
@@ -27,7 +28,9 @@ export type RonpaCommentsProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
+    readonly editorMode?: EditorMode;
 };
 
 export class RonpaComments extends React.Component<RonpaCommentsProps> {
@@ -71,7 +74,9 @@ export class RonpaComments extends React.Component<RonpaCommentsProps> {
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
+            uploadFile={this.props.uploadFile}
             onAction={this._emitChange}
+            editorMode={this.props.editorMode}
         />);
     }
 

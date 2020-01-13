@@ -10,6 +10,7 @@ import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Thesis } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { RonpaEditor } from "../editor/editor";
+import { EditorMode, RonpaEditorUploadResult } from "../editor/type";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
 import { RonpaContent } from "./content";
@@ -33,7 +34,9 @@ export type RonpaBulletProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
+    readonly editorMode?: EditorMode;
 };
 
 export type RonpaBulletStates = {
@@ -100,7 +103,13 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             username={this.props.username}
             visible={this.state.replying}
             getAvatar={this.props.getAvatar}
+            uploadFile={this.props.uploadFile}
             onAction={this._emitChange}
+
+            story={this.props.bullet.story}
+            reply={this.props.bullet.id}
+
+            mode={this.props.editorMode}
         />);
     }
 

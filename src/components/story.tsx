@@ -8,6 +8,7 @@ import { mergeClasses } from "@sudoo/jss";
 import * as React from "react";
 import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
+import { EditorMode, RonpaEditorUploadResult } from "../editor/type";
 import { storyStyle } from "../style/story";
 import { RonpaBullet } from "./bullet";
 
@@ -27,7 +28,9 @@ export type RonpaStoryProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
+    readonly editorMode?: EditorMode;
 };
 
 export class RonpaStory extends React.Component<RonpaStoryProps> {
@@ -66,7 +69,9 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
+            uploadFile={this.props.uploadFile}
             onAction={this._emitChange}
+            editorMode={this.props.editorMode}
         >
             {story.bullets.map(this._renderBullets)}
         </RonpaBullet>);
@@ -89,7 +94,9 @@ export class RonpaStory extends React.Component<RonpaStoryProps> {
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
+            uploadFile={this.props.uploadFile}
             onAction={this._emitChange}
+            editorMode={this.props.editorMode}
         />);
     }
 
