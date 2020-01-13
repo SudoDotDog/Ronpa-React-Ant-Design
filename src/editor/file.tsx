@@ -160,6 +160,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
                     path: result.path,
                     originalName: file.name,
                     mimeType: file.type,
+                    size: file.size,
                     lastModifyAt: new Date(file.lastModified),
                     uploadedAt: result.uploadedAt,
                 });
