@@ -7,7 +7,8 @@
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
-import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Thesis } from "ronpa";
+import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
+import { RonpaFileContent } from "../content/file";
 import { RonpaTextContent } from "../content/text";
 import { ReactionPropsConfig } from "../declare";
 import { RonpaEditor } from "../editor/editor";
@@ -24,7 +25,7 @@ export type RonpaBulletProps = {
 
     readonly username: string;
     readonly storyId: string;
-    readonly bullet: Bullet;
+    readonly bullet: Bullet<any>;
 
     readonly thesis?: Thesis;
 
@@ -83,13 +84,30 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
 
     private _renderContent() {
 
-        return (<RonpaTextContent
-            style={this.props.contentStyle}
-            content={this.props.bullet.content}
-            thesis={this.props.thesis}
-            insiders={this.props.insiders}
-            contentLimit={this.props.contentLimit}
-        />);
+        switch (this.props.bullet.type) {
+            case RECORD_TYPE.TEXT: {
+                const bullet: Bullet<RECORD_TYPE.TEXT> = this.props.bullet;
+                return (<RonpaTextContent
+                    style={this.props.contentStyle}
+                    content={bullet.content}
+                    thesis={this.props.thesis}
+                    insiders={this.props.insiders}
+                    contentLimit={this.props.contentLimit}
+                />);
+            }
+            case RECORD_TYPE.FILE: {
+                const bullet: Bullet<RECORD_TYPE.FILE> = this.props.bullet;
+                return (<RonpaFileContent
+                    style={this.props.contentStyle}
+                    content={bullet.content}
+                    thesis={this.props.thesis}
+                    insiders={this.props.insiders}
+                    contentLimit={this.props.contentLimit}
+                />);
+            }
+        }
+
+        return null;
     }
 
     private _renderEditor() {

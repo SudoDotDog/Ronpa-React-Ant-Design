@@ -6,7 +6,7 @@
  */
 
 import * as Chance from "chance";
-import { Bullet, Reaction, Ronpa, Story } from "ronpa";
+import { Bullet, Reaction, RECORD_TYPE, Ronpa, Story } from "ronpa";
 
 export const createMockRonpa = (username?: string): Ronpa => {
 
@@ -32,9 +32,26 @@ export const createMockRonpa = (username?: string): Ronpa => {
         story: story.id,
     });
 
-    const bullet2: Bullet = Bullet.fromRecord({
+    const bullet2: Bullet<RECORD_TYPE.FILE> = Bullet.fromRecord<RECORD_TYPE.FILE>({
+        type: RECORD_TYPE.FILE,
         id: chance.string(),
-        content: chance.paragraph(),
+        content: [{
+            id: "first",
+            path: "https://google.com/robots.txt",
+            originalName: "first-file.txt",
+            mimeType: "text",
+            size: 340,
+            lastModifyAt: new Date(),
+            uploadedAt: new Date(),
+        }, {
+            id: "second",
+            path: "https://google.com/robots.txt",
+            originalName: "second-file.txt",
+            mimeType: "text",
+            size: 600,
+            lastModifyAt: new Date(),
+            uploadedAt: new Date(),
+        }],
         at: new Date(),
         by: chance.name(),
         story: story.id,
