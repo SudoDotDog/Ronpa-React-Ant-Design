@@ -1,0 +1,24 @@
+---
+menu: Content
+name: Text
+---
+
+import { Playground } from "docz";
+import { RonpaTextContent } from "../../src/index";
+
+# Text Content
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+## Simple
+
+<Playground>
+  <RonpaTextContent 
+    content="Content"
+    thesis={{
+        insiders: ["First Insider"]
+    }}
+    insiders
+    contentLimit={5}
+  />
+</Playground>

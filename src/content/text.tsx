@@ -4,26 +4,26 @@
  * @description Text
  */
 
-import { mergeClasses } from "@sudoo/jss";
 import { Icon } from "antd";
 import * as React from "react";
 import { contentStyle } from "../style/content";
+import { RonpaBaseContent } from "./base";
 import { RonpaContentBaseProps } from "./type";
 
-export type RonpaContentProps = {
+export type RonpaContentTextProps = {
 
     readonly content: string;
 } & RonpaContentBaseProps;
 
-export type RonpaContentStates = {
+export type RonpaContentTextStates = {
 
     readonly expended: boolean;
     readonly maxHeight: number;
 };
 
-export class RonpaContent extends React.Component<RonpaContentProps, RonpaContentStates> {
+export class RonpaTextContent extends React.Component<RonpaContentTextProps, RonpaContentTextStates> {
 
-    public readonly state: RonpaContentStates = {
+    public readonly state: RonpaContentTextStates = {
 
         expended: false,
         maxHeight: 0,
@@ -32,7 +32,7 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
     private readonly _contentStyle = contentStyle.use();
     private _div: HTMLDivElement | null = null;
 
-    public constructor(props: RonpaContentProps) {
+    public constructor(props: RonpaContentTextProps) {
 
         super(props);
 
@@ -48,36 +48,16 @@ export class RonpaContent extends React.Component<RonpaContentProps, RonpaConten
                 maxHeight: this.state.maxHeight === 0 ? 'none' : this.state.maxHeight,
             }}
         >
-            {this._renderMain()}
+            <RonpaBaseContent
+                style={this.props.style}
+                className={this.props.className}
+                thesis={this.props.thesis}
+                insiders={this.props.insiders}
+                contentLimit={this.props.contentLimit}
+            >
+                {this._renderContent()}
+            </RonpaBaseContent>
         </div>);
-    }
-
-    private _renderMain() {
-
-        if (!this.props.thesis || this.props.thesis.insiders.length === 0) {
-            return (<div
-                style={this.props.style}
-                className={mergeClasses(
-                    this.props.className,
-                    this._contentStyle.content,
-                )}
-            >
-                {this._renderContent()}
-            </div>);
-        }
-
-        return (<React.Fragment>
-            {this._renderInsiders(this.props.thesis.insiders)}
-            <div
-                style={this.props.style}
-                className={mergeClasses(
-                    this.props.className,
-                    this._contentStyle.content,
-                )}
-            >
-                {this._renderContent()}
-            </div>
-        </React.Fragment>);
     }
 
     private _renderContent() {
