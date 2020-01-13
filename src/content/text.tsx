@@ -1,27 +1,19 @@
 /**
  * @author WMXPY
- * @namespace React_Ant_Design
- * @description Content
+ * @namespace React_Ant_Design_Content
+ * @description Text
  */
 
 import { mergeClasses } from "@sudoo/jss";
 import { Icon } from "antd";
 import * as React from "react";
-import { Thesis } from "ronpa";
 import { contentStyle } from "../style/content";
+import { RonpaContentBaseProps } from "./type";
 
 export type RonpaContentProps = {
 
-    readonly style?: React.CSSProperties;
-    readonly className?: string;
-
     readonly content: string;
-
-    readonly thesis?: Thesis;
-
-    readonly insiders?: boolean;
-    readonly contentLimit?: number;
-};
+} & RonpaContentBaseProps;
 
 export type RonpaContentStates = {
 

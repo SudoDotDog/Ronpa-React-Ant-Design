@@ -8,7 +8,7 @@ import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RONPA_ACTION, Thesis } from "ronpa";
-import { RonpaContent } from "../content/content";
+import { RonpaContent } from "../content/text";
 import { ReactionPropsConfig } from "../declare";
 import { RonpaEditor } from "../editor/editor";
 import { EditorMode, RonpaEditorUploadResult } from "../editor/type";
