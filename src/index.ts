@@ -12,6 +12,7 @@ export * from "./components/bullet";
 export * from "./components/ronpa";
 export * from "./components/story";
 export * from "./content/base";
+export * from "./content/file";
 export * from "./content/text";
 export * from "./content/type";
 export * from "./declare";

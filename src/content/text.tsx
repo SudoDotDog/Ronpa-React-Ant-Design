@@ -6,24 +6,25 @@
 
 import { Icon } from "antd";
 import * as React from "react";
+import { ContentType, RECORD_TYPE } from "ronpa";
 import { contentStyle } from "../style/content";
 import { RonpaBaseContent } from "./base";
 import { RonpaContentBaseProps } from "./type";
 
-export type RonpaContentTextProps = {
+export type RonpaTextContentProps = {
 
-    readonly content: string;
+    readonly content: ContentType<RECORD_TYPE.TEXT>;
 } & RonpaContentBaseProps;
 
-export type RonpaContentTextStates = {
+export type RonpaTextContentStates = {
 
     readonly expended: boolean;
     readonly maxHeight: number;
 };
 
-export class RonpaTextContent extends React.Component<RonpaContentTextProps, RonpaContentTextStates> {
+export class RonpaTextContent extends React.Component<RonpaTextContentProps, RonpaTextContentStates> {
 
-    public readonly state: RonpaContentTextStates = {
+    public readonly state: RonpaTextContentStates = {
 
         expended: false,
         maxHeight: 0,
@@ -32,7 +33,7 @@ export class RonpaTextContent extends React.Component<RonpaContentTextProps, Ron
     private readonly _contentStyle = contentStyle.use();
     private _div: HTMLDivElement | null = null;
 
-    public constructor(props: RonpaContentTextProps) {
+    public constructor(props: RonpaTextContentProps) {
 
         super(props);
 
@@ -101,18 +102,5 @@ export class RonpaTextContent extends React.Component<RonpaContentTextProps, Ron
                 maxHeight: this._div.scrollHeight,
             });
         });
-    }
-
-    private _renderInsiders(insiders: string[]) {
-
-        return (<div>
-            <Icon type="team" />
-            {insiders.map((name: string) =>
-                (<span
-                    key={name}
-                    className={this._contentStyle.username}
-                > @{name} </span>),
-            )}
-        </div>);
     }
 }

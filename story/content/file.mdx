@@ -1,0 +1,32 @@
+---
+menu: Content
+name: File
+---
+
+import { Playground } from "docz";
+import { RonpaFileContent } from "../../src/index";
+
+# File Content
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+## Simple
+
+<Playground>
+  <RonpaFileContent 
+    content={[{
+        id: "id",
+        path: "https://google.com/robots.txt",
+        originalName: "file-name.txt",
+        mimeType: "text",
+        size: 340,
+        lastModifyAt: new Date(),
+        uploadedAt: new Date(),
+    }]}
+    thesis={{
+        insiders: ["First Insider"]
+    }}
+    insiders
+    contentLimit={5}
+  />
+</Playground>
