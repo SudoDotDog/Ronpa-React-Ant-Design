@@ -5,7 +5,8 @@ name: Attachment
 
 import { Playground } from "docz";
 import { Button } from "antd";
-import { createMockRonpa } from "../mock/ronpa"
+import { createMockRonpa } from "../mock/ronpa";
+import { mockUploadFunction } from "../mock/util";
 import { RonpaAttachmentEditor } from "../../src/index";
 
 # Attachment Editor
@@ -17,10 +18,7 @@ import { RonpaAttachmentEditor } from "../../src/index";
 <Playground>
   <RonpaAttachmentEditor 
     username="Jack"
-    uploadFile={() => ({
-      path: 'https://google.com/robots.txt',
-      uploadedAt: new Date(),
-    })}
+    uploadFile={mockUploadFunction}
     onAction={console.log}
   />
 </Playground>
@@ -30,10 +28,7 @@ import { RonpaAttachmentEditor } from "../../src/index";
 <Playground>
   <RonpaAttachmentEditor 
     username="Jack"
-    uploadFile={() => ({
-      path: 'https://google.com/robots.txt',
-      uploadedAt: new Date(),
-    })}
+    uploadFile={mockUploadFunction}
     onAction={console.log}
     story="story"
     reply="reply"
@@ -45,10 +40,7 @@ import { RonpaAttachmentEditor } from "../../src/index";
 <Playground>
   <RonpaAttachmentEditor 
     username="Jack"
-    uploadFile={() => ({
-      path: 'https://google.com/robots.txt',
-      uploadedAt: new Date(),
-    })}
+    uploadFile={mockUploadFunction}
     onAction={console.log}
     actions={(onAction) => (
       <Button.Group style={{marginTop: '5px'}}>
