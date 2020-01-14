@@ -1,0 +1,45 @@
+---
+name: Ronpa
+---
+
+import { Playground } from "docz";
+import { createMockRonpa } from "./mock/ronpa"
+import { RonpaComments } from "../src/index";
+
+# Playground
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+<Playground>
+    {() => {
+        class ExamplePlayground extends React.Component {
+
+            render() {
+                return (<RonpaComments 
+                    contentStyle={{
+                        fontStyle: 'italic',
+                    }}
+                    contentLimit={100}
+                    username="Jack"
+                    uploadFile={() => ({
+                        path: 'https://google.com/robots.txt',
+                        uploadedAt: new Date(),
+                    })}
+                    editorMode={'attachment'}
+                    onAction={console.log}
+                    ronpa={createMockRonpa("Jack")}
+                    repliable
+                    reactions={[{
+                        name: 'like',
+                        text: '👍',
+                    }, {
+                        name: 'love',
+                        text: '😍',
+                    }]}
+                />);
+            }
+        }
+
+        return <ExamplePlayground />
+    }}
+</Playground>
