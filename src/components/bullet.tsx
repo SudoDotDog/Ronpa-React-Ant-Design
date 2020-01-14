@@ -13,7 +13,7 @@ import { RonpaFileContent } from "../content/file";
 import { RonpaTextContent } from "../content/text";
 import { ReactionPropsConfig } from "../declare";
 import { RonpaEditor } from "../editor/editor";
-import { EditorMode, RonpaEditorUploadResult } from "../editor/type";
+import { EditorActionFunction, EditorMode, RonpaEditorUploadResult } from "../editor/type";
 import { bulletStyle } from "../style/bullet";
 import { countReactionType, hasReactionType } from "../util";
 
@@ -39,6 +39,7 @@ export type RonpaBulletProps = {
     readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
     readonly editorMode?: EditorMode;
+    readonly editorActions?: EditorActionFunction;
 };
 
 export type RonpaBulletStates = {
@@ -138,6 +139,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             reply={this.props.bullet.id}
 
             mode={this.props.editorMode}
+            actions={this.props.editorActions}
         />);
     }
 

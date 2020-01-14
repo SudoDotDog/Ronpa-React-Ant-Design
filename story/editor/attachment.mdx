@@ -4,6 +4,7 @@ name: Attachment
 ---
 
 import { Playground } from "docz";
+import { Button } from "antd";
 import { createMockRonpa } from "../mock/ronpa"
 import { RonpaAttachmentEditor } from "../../src/index";
 
@@ -36,5 +37,25 @@ import { RonpaAttachmentEditor } from "../../src/index";
     onAction={console.log}
     story="story"
     reply="reply"
+  />
+</Playground>
+
+## Customized Actions
+
+<Playground>
+  <RonpaAttachmentEditor 
+    username="Jack"
+    uploadFile={() => ({
+      path: 'https://google.com/robots.txt',
+      uploadedAt: new Date(),
+    })}
+    onAction={console.log}
+    actions={(onAction) => (
+      <Button.Group style={{marginTop: '5px'}}>
+        <Button onClick={onAction}>Customized Action 1</Button>
+        <Button onClick={onAction} type="primary">Customized Action 2 (Primary)</Button>
+        <Button onClick={onAction} disabled>Customized Action 3 (Disabled)</Button>
+      </Button.Group>
+    )}
   />
 </Playground>

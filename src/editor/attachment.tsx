@@ -108,13 +108,21 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                         </div>);
                     }}
                 </Dropzone>
-                <Button
-                    className={this._editorStyle.submitButton}
-                    type="primary"
-                    onClick={this._emitAction}
-                >Submit</Button>
+                {this._renderActions()}
             </div>}
         />);
+    }
+
+    private _renderActions() {
+
+        if (this.props.actions) {
+            return this.props.actions(this._emitAction);
+        }
+        return (<Button
+            className={this._editorStyle.submitButton}
+            type="primary"
+            onClick={this._emitAction}
+        >Submit</Button>);
     }
 
     private _renderFiles() {

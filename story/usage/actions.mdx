@@ -1,56 +1,40 @@
 ---
-menu: Editor
-name: File
+menu: Usage
+name: Customized Actions
 ---
 
 import { Playground } from "docz";
 import { Button } from "antd";
 import { createMockRonpa } from "../mock/ronpa"
-import { RonpaFileEditor } from "../../src/index";
+import { RonpaComments } from "../../src/index";
 
-# File Editor
+# Customized Actions Usage
 
 <link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
 
-## Thesis
-
 <Playground>
-  <RonpaFileEditor 
+  <RonpaComments 
+    contentStyle={{
+      fontStyle: 'italic',
+    }}
+    contentLimit={100}
     username="Jack"
     uploadFile={() => ({
       path: 'https://google.com/robots.txt',
       uploadedAt: new Date(),
     })}
     onAction={console.log}
-  />
-</Playground>
-
-## Reply
-
-<Playground>
-  <RonpaFileEditor 
-    username="Jack"
-    uploadFile={() => ({
-      path: 'https://google.com/robots.txt',
-      uploadedAt: new Date(),
-    })}
-    onAction={console.log}
-    story="story"
-    reply="reply"
-  />
-</Playground>
-
-## Customized Actions
-
-<Playground>
-  <RonpaFileEditor 
-    username="Jack"
-    uploadFile={() => ({
-      path: 'https://google.com/robots.txt',
-      uploadedAt: new Date(),
-    })}
-    onAction={console.log}
-    actions={(onAction) => (
+    ronpa={createMockRonpa("Jack")}
+    repliable
+    reactions={[{
+      name: 'like',
+      text: '👍',
+    }, {
+      name: 'love',
+      text: '😍',
+    }]}
+    editorMode={'attachment'}
+    editorActions={(onAction) => (
       <Button.Group style={{marginTop: '5px'}}>
         <Button onClick={onAction}>Customized Action 1</Button>
         <Button onClick={onAction} type="primary">Customized Action 2 (Primary)</Button>
