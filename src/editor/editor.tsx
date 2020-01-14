@@ -126,6 +126,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             return {
                 ...this.props.style,
                 height: '0px',
+                maxHeight: '0px',
             };
         }
 
@@ -133,12 +134,14 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             return {
                 ...this.props.style,
                 height: '0px',
+                maxHeight: '0px',
             };
         }
 
         return {
             ...this.props.style,
             height: 'auto',
+            maxHeight: '512px',
         };
     }
 }
