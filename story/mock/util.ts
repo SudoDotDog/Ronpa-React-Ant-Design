@@ -10,7 +10,7 @@ import { RonpaEditorUploadResult } from "../../src/editor/type";
 
 export const mockUploadFunction = async (file: File): Promise<RonpaEditorUploadResult> => {
 
-    const chance: Chance.Chance = new Chance('mock-ronpa');
+    const chance: Chance.Chance = new Chance();
 
     await new Promise((resolve: () => void) => setTimeout(resolve, chance.natural({
         max: 3000,

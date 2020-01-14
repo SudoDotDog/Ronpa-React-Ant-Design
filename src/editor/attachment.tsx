@@ -14,10 +14,13 @@ import { ChangeType, draftAddReplyChange, draftAddThesisChange, FileContent, REC
 import { editorStyle } from "../style/editor";
 import { RonpaEditorBaseProps, RonpaEditorUploadResult } from "./type";
 
+type UploadingFile = Pick<FileContent, 'id' | 'originalName' | 'mimeType' | 'size' | 'lastModifyAt'>;
+
 export type RonpaAttachmentEditorStates = {
 
     readonly content: string;
     readonly files: FileContent[];
+    readonly uploading: UploadingFile[];
     readonly dragHover: boolean;
 };
 
@@ -27,6 +30,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
         content: '',
         files: [],
+        uploading: [],
         dragHover: false,
     };
 
@@ -79,6 +83,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                                 })}
                             />
                             {this._renderFiles()}
+                            {this._renderUploadings()}
                             <Button
                                 type="ghost"
                                 block
@@ -145,6 +150,20 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
         </div>);
     }
 
+    private _renderUploadings() {
+
+        if (this.state.uploading.length === 0) {
+            return null;
+        }
+
+        return (<div className={this._editorStyle.attachmentContainer}>
+            {this.state.uploading.map((file: UploadingFile) => <Tag
+                key={file.id}
+                color="red"
+            >{file.originalName}</Tag>)}
+        </div>);
+    }
+
     private _emitAction() {
 
         if (this.props.onAction) {
@@ -179,29 +198,49 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
         });
     }
 
-    private async _uploadFile(files: File[]) {
+    private _uploadFile(files: File[]) {
 
         if (!this.props.uploadFile) {
             throw new Error('[Ronpa-React-Ant-Design] Upload File Required');
         }
 
-        const fileContents: FileContent[] = [];
+        const uploading: UploadingFile[] = [];
         for (const file of files) {
-            const result: RonpaEditorUploadResult = await this.props.uploadFile(file);
-            fileContents.push({
+
+            const upload: UploadingFile = {
                 id: randomUnique(),
-                path: result.path,
                 originalName: file.name,
                 mimeType: file.type,
                 size: file.size,
                 lastModifyAt: new Date(file.lastModified),
-                uploadedAt: result.uploadedAt,
+            };
+
+            Promise.resolve(this.props.uploadFile(file)).then((result: RonpaEditorUploadResult) => {
+                const content: FileContent = {
+                    ...upload,
+                    path: result.path,
+                    uploadedAt: result.uploadedAt,
+                };
+
+                this.setState({
+                    files: [
+                        ...this.state.files,
+                        content,
+                    ],
+                });
+            }).catch((_: any) => {
+                return;
+            }).finally(() => {
+                this.setState({
+                    uploading: this.state.uploading.filter((each: UploadingFile) => each.id !== upload.id),
+                });
             });
+            uploading.push(upload);
         }
         this.setState({
-            files: [
-                ...this.state.files,
-                ...fileContents,
+            uploading: [
+                ...this.state.uploading,
+                ...uploading,
             ],
         });
     }
