@@ -146,6 +146,9 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
     private _emitChange<T extends RONPA_ACTION>(change: ChangeType<T>): void {
 
         if (this.props.onAction) {
+            this.setState({
+                replying: false,
+            });
             this.props.onAction(change);
         }
         return;

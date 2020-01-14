@@ -34,10 +34,7 @@ import { RonpaComments } from "../src/index";
                     editorMode={'attachment'}
                     onAction={(action) => {
                         const ronpa = this.state.ronpa;
-                        console.log(action);
-                        console.log(ronpa.flat());
                         ronpa.apply(action);
-                        console.log(ronpa.flat());
                         this.setState({
                             ronpa,
                         });
