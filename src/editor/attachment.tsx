@@ -11,6 +11,7 @@ import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
 import { ChangeType, draftAddReplyChange, draftAddThesisChange, FileContent, RECORD_TYPE } from "ronpa";
+import { getIconName } from "../content/file-icon";
 import { editorStyle } from "../style/editor";
 import { RonpaEditorBaseProps, RonpaEditorUploadResult } from "./type";
 
@@ -140,13 +141,14 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
             {this.state.files.map((file: FileContent) => <Tag
                 key={file.id}
                 closable
+                color="blue"
                 onClose={(e: Event) => {
                     e.preventDefault();
                     this.setState({
                         files: this.state.files.filter((current: FileContent) => current.id !== file.id),
                     });
                 }}
-            >{file.originalName}</Tag>)}
+            ><Icon type={getIconName(file.mimeType)} /> {file.originalName}</Tag>)}
         </div>);
     }
 
@@ -159,8 +161,8 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
         return (<div className={this._editorStyle.attachmentContainer}>
             {this.state.uploading.map((file: UploadingFile) => <Tag
                 key={file.id}
-                color="red"
-            >{file.originalName}</Tag>)}
+                color="orange"
+            ><Icon type="loading" /> {file.originalName}</Tag>)}
         </div>);
     }
 
