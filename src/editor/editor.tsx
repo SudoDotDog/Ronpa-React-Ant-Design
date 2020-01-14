@@ -52,14 +52,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
     private _renderStaticEditor() {
 
         return (<RonpaStaticEditor
-            className={mergeClasses(
-                this.props.className,
-                assertIfTri(
-                    this.props.visible,
-                    this._editorStyle.visible,
-                    this._editorStyle.invisible,
-                ),
-            )}
+            className={this.props.className}
 
             username={this.props.username}
 
@@ -77,14 +70,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
     private _renderFileEditor() {
 
         return (<RonpaFileEditor
-            className={mergeClasses(
-                this.props.className,
-                assertIfTri(
-                    this.props.visible,
-                    this._editorStyle.visible,
-                    this._editorStyle.invisible,
-                ),
-            )}
+            className={this.props.className}
 
             username={this.props.username}
 
@@ -103,14 +89,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
     private _renderAttachmentEditor() {
 
         return (<RonpaAttachmentEditor
-            className={mergeClasses(
-                this.props.className,
-                assertIfTri(
-                    this.props.visible,
-                    this._editorStyle.visible,
-                    this._editorStyle.invisible,
-                ),
-            )}
+            className={this.props.className}
 
             username={this.props.username}
 
@@ -131,23 +110,23 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
         if (!this._container.current) {
             return {
                 ...this.props.style,
-                height: '0px',
                 maxHeight: '0px',
+                opacity: 0,
             };
         }
 
         if (!this.props.visible) {
             return {
                 ...this.props.style,
-                height: '0px',
                 maxHeight: '0px',
+                opacity: 0,
             };
         }
 
         return {
             ...this.props.style,
-            height: 'auto',
             maxHeight: '512px',
+            opacity: 1,
         };
     }
 }

@@ -13,12 +13,6 @@ const editorStyleBase: JSSStyle = {
         overflow: 'hidden',
         outline: 0,
     },
-    visible: {
-        opacity: 1,
-    },
-    invisible: {
-        opacity: 0,
-    },
     submitButton: {
         marginTop: '5px',
     },
