@@ -8,6 +8,7 @@ import { assertIfTrue, mergeClasses } from "@sudoo/jss";
 import { Comment } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
+import { RonpaAttachmentContent } from "../content/attachment";
 import { RonpaFileContent } from "../content/file";
 import { RonpaTextContent } from "../content/text";
 import { ReactionPropsConfig } from "../declare";
@@ -98,6 +99,16 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
             case RECORD_TYPE.FILE: {
                 const bullet: Bullet<RECORD_TYPE.FILE> = this.props.bullet;
                 return (<RonpaFileContent
+                    style={this.props.contentStyle}
+                    content={bullet.content}
+                    thesis={this.props.thesis}
+                    insiders={this.props.insiders}
+                    contentLimit={this.props.contentLimit}
+                />);
+            }
+            case RECORD_TYPE.ATTACHMENT: {
+                const bullet: Bullet<RECORD_TYPE.ATTACHMENT> = this.props.bullet;
+                return (<RonpaAttachmentContent
                     style={this.props.contentStyle}
                     content={bullet.content}
                     thesis={this.props.thesis}

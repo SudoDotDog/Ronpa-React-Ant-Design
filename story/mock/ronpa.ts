@@ -76,7 +76,37 @@ export const createMockRonpa = (username?: string): Ronpa => {
     });
 
     ronpa.addStory(story);
-    ronpa.createAndGetStory(username, chance.paragraph());
+    const secondStory: Story = ronpa.createAndGetStory(username, chance.paragraph());
+
+    const bullet3: Bullet<RECORD_TYPE.ATTACHMENT> = Bullet.fromRecord<RECORD_TYPE.ATTACHMENT>({
+        type: RECORD_TYPE.ATTACHMENT,
+        id: chance.string(),
+        content: {
+            text: chance.paragraph(),
+            files: [{
+                id: "first",
+                path: "https://google.com/robots.txt",
+                originalName: "first-file.txt",
+                mimeType: "text",
+                size: 340,
+                lastModifyAt: new Date(),
+                uploadedAt: new Date(),
+            }, {
+                id: "second",
+                path: "https://google.com/robots.txt",
+                originalName: "second-file.txt",
+                mimeType: "text",
+                size: 600,
+                lastModifyAt: new Date(),
+                uploadedAt: new Date(),
+            }],
+        },
+        at: new Date(),
+        by: chance.name(),
+        story: secondStory.id,
+    });
+
+    secondStory.addBullet(bullet3);
 
     return ronpa;
 };

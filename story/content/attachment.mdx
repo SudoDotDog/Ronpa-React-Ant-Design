@@ -1,0 +1,35 @@
+---
+menu: Content
+name: Attachment
+---
+
+import { Playground } from "docz";
+import { RonpaAttachmentContent } from "../../src/index";
+
+# Attachment Content
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+## Simple
+
+<Playground>
+  <RonpaAttachmentContent 
+    content={{
+        text: "hello world",
+        files: [{
+            id: "first",
+            path: "https://google.com/robots.txt",
+            originalName: "first-file.txt",
+            mimeType: "text",
+            size: 340,
+            lastModifyAt: new Date(),
+            uploadedAt: new Date(),
+        }],
+    }}
+    thesis={{
+        insiders: ["First Insider"]
+    }}
+    insiders
+    contentLimit={5}
+  />
+</Playground>

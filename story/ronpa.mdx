@@ -17,6 +17,7 @@ import { RonpaComments } from "../src/index";
     contentStyle={{
       fontStyle: 'italic',
     }}
+    contentLimit={100}
     username="Jack"
     onAction={console.log}
     ronpa={createMockRonpa("Jack")}
@@ -38,6 +39,7 @@ import { RonpaComments } from "../src/index";
     contentStyle={{
       fontStyle: 'italic',
     }}
+    contentLimit={100}
     username="Jack"
     uploadFile={() => ({
       path: 'https://google.com/robots.txt',
