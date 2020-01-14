@@ -8,6 +8,7 @@ import { Avatar, Icon, List } from "antd";
 import * as React from "react";
 import { ContentType, FileContent, RECORD_TYPE } from "ronpa";
 import { contentStyle } from "../style/content";
+import { FileIcon } from "./file-icon";
 import { RonpaTextContent } from "./text";
 import { RonpaContentBaseProps } from "./type";
 
@@ -59,9 +60,7 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
         >
             <List.Item.Meta
                 avatar={<Avatar shape="square">
-                    <Icon type="file-text" theme="filled" style={{
-                        fontSize: '15px',
-                    }} />
+                    <FileIcon mimeType={file.mimeType} />
                 </Avatar>}
                 title={file.originalName}
                 description={file.size}

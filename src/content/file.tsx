@@ -9,6 +9,7 @@ import * as React from "react";
 import { ContentType, FileContent, RECORD_TYPE } from "ronpa";
 import { contentStyle } from "../style/content";
 import { RonpaBaseContent } from "./base";
+import { FileIcon } from "./file-icon";
 import { RonpaContentBaseProps } from "./type";
 
 export type RonpaFileContentProps = {
@@ -55,9 +56,7 @@ export class RonpaFileContent extends React.Component<RonpaFileContentProps> {
         >
             <List.Item.Meta
                 avatar={<Avatar shape="square">
-                    <Icon type="file-text" theme="filled" style={{
-                        fontSize: '15px',
-                    }} />
+                    <FileIcon mimeType={file.mimeType} />
                 </Avatar>}
                 title={file.originalName}
                 description={file.size}
