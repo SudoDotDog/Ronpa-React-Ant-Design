@@ -1,0 +1,32 @@
+---
+menu: Usage
+name: Common
+---
+
+import { Playground } from "docz";
+import { createMockRonpa } from "../mock/ronpa"
+import { RonpaComments } from "../../src/index";
+
+# Common Usage
+
+<link href="https://cdn.jsdelivr.net/npm/antd@3.26.6/dist/antd.min.css" rel="stylesheet" />
+
+<Playground>
+  <RonpaComments 
+    contentStyle={{
+      fontStyle: 'italic',
+    }}
+    contentLimit={100}
+    username="Jack"
+    onAction={console.log}
+    ronpa={createMockRonpa("Jack")}
+    repliable
+    reactions={[{
+      name: 'like',
+      text: '👍',
+    }, {
+      name: 'love',
+      text: '😍',
+    }]}
+  />
+</Playground>
