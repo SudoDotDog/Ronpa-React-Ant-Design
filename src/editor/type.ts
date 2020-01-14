@@ -27,6 +27,8 @@ export type RonpaEditorBaseProps = {
     readonly getAvatar?: (author: string) => string | React.ReactNode;
     readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
     readonly onAction?: (action: ChangeType<any, any>) => void;
+
+    readonly actions?: (onAction: () => void) => React.ReactNode;
 };
 
 export type EditorMode = 'text' | 'file' | 'attachment';

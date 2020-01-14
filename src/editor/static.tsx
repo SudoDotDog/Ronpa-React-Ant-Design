@@ -50,13 +50,21 @@ export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, Ron
                         content: value.target.value,
                     })}
                 />
-                <Button
-                    className={this._editorStyle.submitButton}
-                    type="primary"
-                    onClick={this._emitTextAction}
-                >Submit</Button>
+                {this._renderActions()}
             </div>}
         />);
+    }
+
+    private _renderActions() {
+
+        if (this.props.actions) {
+            return this.props.actions(this._emitTextAction);
+        }
+        return (<Button
+            className={this._editorStyle.submitButton}
+            type="primary"
+            onClick={this._emitTextAction}
+        >Submit</Button>);
     }
 
     private _emitTextAction() {

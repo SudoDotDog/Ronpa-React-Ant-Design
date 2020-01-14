@@ -4,6 +4,7 @@ name: Static
 ---
 
 import { Playground } from "docz";
+import { Button } from "antd";
 import { createMockRonpa } from "../mock/ronpa"
 import { RonpaStaticEditor } from "../../src/index";
 
@@ -28,5 +29,23 @@ import { RonpaStaticEditor } from "../../src/index";
     story="story"
     reply="reply"
     onAction={console.log}
+  />
+</Playground>
+
+## Customized Actions
+
+<Playground>
+  <RonpaStaticEditor 
+    username="Jack"
+    story="story"
+    reply="reply"
+    onAction={console.log}
+    actions={(onAction) => (
+      <Button.Group style={{marginTop: '5px'}}>
+        <Button onClick={onAction}>Customized Action 1</Button>
+        <Button onClick={onAction} type="primary">Customized Action 2 (Primary)</Button>
+        <Button onClick={onAction} disabled>Customized Action 3 (Disabled)</Button>
+      </Button.Group>
+    )}
   />
 </Playground>
