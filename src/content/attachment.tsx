@@ -4,6 +4,7 @@
  * @description Attachment
  */
 
+import { transformSize } from "@sudoo/numeric";
 import { Avatar, Icon, List } from "antd";
 import * as React from "react";
 import { ContentType, FileContent, RECORD_TYPE } from "ronpa";
@@ -63,7 +64,7 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
                     <FileIcon mimeType={file.mimeType} />
                 </Avatar>}
                 title={file.originalName}
-                description={file.size}
+                description={transformSize(file.size)}
             />
         </List.Item>);
     }
