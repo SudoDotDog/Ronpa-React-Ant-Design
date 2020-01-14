@@ -23,13 +23,20 @@ export type RonpaEditorProps = {
 export class RonpaEditor extends React.Component<RonpaEditorProps> {
 
     private readonly _editorStyle: Classes = editorStyle.use();
-
-    public constructor(props: RonpaEditorProps) {
-
-        super(props);
-    }
+    private readonly _container: React.RefObject<HTMLDivElement> = React.createRef();
 
     public render() {
+
+        return (<div
+            style={this._getEditorStyle()}
+            className={this._editorStyle.editor}
+            ref={this._container}
+        >
+            {this._renderEditor()}
+        </div>);
+    }
+
+    private _renderEditor() {
 
         const mode: EditorMode | undefined = this.props.mode;
         if (!mode || mode === 'text') {
@@ -45,8 +52,6 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
     private _renderStaticEditor() {
 
         return (<RonpaStaticEditor
-
-            style={this.props.style}
             className={mergeClasses(
                 this.props.className,
                 assertIfTri(
@@ -70,8 +75,6 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
     private _renderFileEditor() {
 
         return (<RonpaFileEditor
-
-            style={this.props.style}
             className={mergeClasses(
                 this.props.className,
                 assertIfTri(
@@ -96,8 +99,6 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
     private _renderAttachmentEditor() {
 
         return (<RonpaAttachmentEditor
-
-            style={this.props.style}
             className={mergeClasses(
                 this.props.className,
                 assertIfTri(
@@ -117,5 +118,27 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             uploadFile={this.props.uploadFile}
             onAction={this.props.onAction}
         />);
+    }
+
+    private _getEditorStyle(): React.CSSProperties | undefined {
+
+        if (!this._container.current) {
+            return {
+                ...this.props.style,
+                height: '0px',
+            };
+        }
+
+        if (!this.props.visible) {
+            return {
+                ...this.props.style,
+                height: '0px',
+            };
+        }
+
+        return {
+            ...this.props.style,
+            height: 'auto',
+        };
     }
 }

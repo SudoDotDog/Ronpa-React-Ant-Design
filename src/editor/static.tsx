@@ -36,10 +36,7 @@ export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, Ron
     public render() {
 
         return (<Comment
-            className={mergeClasses(
-                this.props.className,
-                this._editorStyle.editor,
-            )}
+            className={this.props.className}
             style={this.props.style}
             avatar={this._getAvatar(this.props.username)}
             content={<div>

@@ -15,11 +15,9 @@ const editorStyleBase: JSSStyle = {
     },
     visible: {
         opacity: 1,
-        maxHeight: '256px',
     },
     invisible: {
         opacity: 0,
-        maxHeight: '0px',
     },
     submitButton: {
         marginTop: '5px',

@@ -40,10 +40,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
     public render() {
 
         return (<Comment
-            className={mergeClasses(
-                this.props.className,
-                this._editorStyle.editor,
-            )}
+            className={this.props.className}
             style={this.props.style}
             avatar={this._getAvatar(this.props.username)}
             content={<div>
