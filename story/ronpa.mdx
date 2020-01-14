@@ -14,6 +14,12 @@ import { RonpaComments } from "../src/index";
     {() => {
         class ExamplePlayground extends React.Component {
 
+            constructor() {
+                this.state = {
+                    ronpa: createMockRonpa("Jack"),
+                };
+            }
+
             render() {
                 return (<RonpaComments 
                     contentStyle={{
@@ -26,8 +32,17 @@ import { RonpaComments } from "../src/index";
                         uploadedAt: new Date(),
                     })}
                     editorMode={'attachment'}
-                    onAction={console.log}
-                    ronpa={createMockRonpa("Jack")}
+                    onAction={(action) => {
+                        const ronpa = this.state.ronpa;
+                        console.log(action);
+                        console.log(ronpa.flat());
+                        ronpa.apply(action);
+                        console.log(ronpa.flat());
+                        this.setState({
+                            ronpa,
+                        });
+                    }}
+                    ronpa={this.state.ronpa}
                     repliable
                     reactions={[{
                         name: 'like',

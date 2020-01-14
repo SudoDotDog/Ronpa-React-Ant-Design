@@ -28,7 +28,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
         content: chance.paragraph(),
         at: new Date(),
         by: chance.name(),
-        reactions,
+        reactions: [...reactions],
         story: story.id,
     });
 
@@ -62,7 +62,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
         content: chance.paragraph(),
         at: new Date(),
         by: chance.name(),
-        reactions,
+        reactions: [...reactions],
         story: story.id,
     });
 
