@@ -34,6 +34,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
 
         super(props);
 
+        this._shouldEmit = this._shouldEmit.bind(this);
         this._emitTextAction = this._emitTextAction.bind(this);
     }
 
@@ -113,7 +114,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
     private _renderActions() {
 
         if (this.props.actions) {
-            return this.props.actions(this._emitTextAction);
+            return this.props.actions(this._emitTextAction, this._shouldEmit);
         }
         return (<Button
             className={this._editorStyle.submitButton}
@@ -122,7 +123,16 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
         >Submit</Button>);
     }
 
+    private _shouldEmit() {
+
+        return this.state.content.length > 0;
+    }
+
     private _emitTextAction() {
+
+        if (!this._shouldEmit()) {
+            return;
+        }
 
         if (this.props.onAction) {
             this.props.onAction(this._createTextAction());

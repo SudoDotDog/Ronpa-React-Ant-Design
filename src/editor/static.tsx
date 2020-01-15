@@ -29,6 +29,7 @@ export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, Ron
 
         super(props);
 
+        this._shouldEmit = this._shouldEmit.bind(this);
         this._emitTextAction = this._emitTextAction.bind(this);
     }
 
@@ -57,7 +58,7 @@ export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, Ron
     private _renderActions() {
 
         if (this.props.actions) {
-            return this.props.actions(this._emitTextAction);
+            return this.props.actions(this._emitTextAction, this._shouldEmit);
         }
         return (<Button
             className={this._editorStyle.submitButton}
@@ -66,7 +67,16 @@ export class RonpaStaticEditor extends React.Component<RonpaEditorBaseProps, Ron
         >Submit</Button>);
     }
 
+    private _shouldEmit() {
+
+        return this.state.content.length > 0;
+    }
+
     private _emitTextAction() {
+
+        if (!this._shouldEmit()) {
+            return;
+        }
 
         if (this.props.onAction) {
             this.props.onAction(this._createTextAction());

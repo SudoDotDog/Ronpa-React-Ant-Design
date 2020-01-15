@@ -41,6 +41,7 @@ export class RonpaDynamicEditor extends React.Component<RonpaEditorBaseProps, Ro
 
         super(props);
 
+        this._shouldEmit = this._shouldEmit.bind(this);
         this._emitAction = this._emitAction.bind(this);
     }
 
@@ -122,7 +123,7 @@ export class RonpaDynamicEditor extends React.Component<RonpaEditorBaseProps, Ro
     private _renderActions() {
 
         if (this.props.actions) {
-            return this.props.actions(this._emitAction);
+            return this.props.actions(this._emitAction, this._shouldEmit);
         }
         return (<Button
             className={this._editorStyle.submitButton}
@@ -166,7 +167,16 @@ export class RonpaDynamicEditor extends React.Component<RonpaEditorBaseProps, Ro
         </div>);
     }
 
+    private _shouldEmit() {
+
+        return this.state.content.length > 0 || this.state.files.length > 0;
+    }
+
     private _emitAction() {
+
+        if (!this._shouldEmit()) {
+            return;
+        }
 
         if (this.props.onAction) {
 

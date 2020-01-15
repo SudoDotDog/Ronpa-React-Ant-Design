@@ -31,5 +31,5 @@ export type RonpaEditorBaseProps = {
     readonly actions?: EditorActionFunction;
 };
 
-export type EditorActionFunction = (onAction: () => void) => React.ReactNode;
+export type EditorActionFunction = (onAction: () => void, shouldEmit: () => boolean) => React.ReactNode;
 export type EditorMode = 'text' | 'file' | 'attachment' | 'dynamic';
