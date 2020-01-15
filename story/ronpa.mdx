@@ -3,6 +3,7 @@ name: Ronpa
 ---
 
 import { Playground } from "docz";
+import { Button } from "antd";
 import { createMockRonpa } from "./mock/ronpa"
 import { RonpaComments } from "../src/index";
 
@@ -32,6 +33,18 @@ import { RonpaComments } from "../src/index";
                         uploadedAt: new Date(),
                     })}
                     editorMode="dynamic"
+                    editorActions={(onAction, shouldEmit) => 
+                        <Button
+                            style={{
+                                marginTop: '5px',
+                            }}
+                            type="primary"
+                            onClick={onAction}
+                            disabled={!shouldEmit()}
+                        >
+                            GO!
+                        </Button>
+                    }
                     onAction={(action) => {
                         console.log(action);
                         const ronpa = this.state.ronpa;
