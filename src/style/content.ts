@@ -31,6 +31,11 @@ const contentStyleBase: JSSStyle = {
             textDecoration: 'underline',
         },
     },
+    itemEach: {
+        padding: '8px !important',
+        paddingTop: '5px !important',
+        paddingBottom: '5px !important',
+    },
 };
 
 export const contentStyle: StyleManager = StyleManager.create(contentStyleBase, 'Content').setPrefix('Ronpa-React-Ant-Design-');

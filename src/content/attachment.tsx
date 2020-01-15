@@ -63,7 +63,9 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
 
     private _renderFile(file: FileContent) {
 
+        const sizeText: string = file.size ? transformSize(file.size) : 'Unknown';
         return (<List.Item
+            className={this._contentStyle.itemEach}
             key={file.id}
             actions={[
                 (<a onClick={() => window.open(file.path)}><Icon type="download" /> Download</a>),
@@ -74,7 +76,7 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
                     <FileIcon mimeType={file.mimeType} />
                 </Avatar>}
                 title={file.originalName}
-                description={transformSize(file.size)}
+                description={sizeText}
             />
         </List.Item>);
     }
