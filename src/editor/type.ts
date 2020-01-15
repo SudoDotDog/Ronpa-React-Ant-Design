@@ -32,4 +32,4 @@ export type RonpaEditorBaseProps = {
 };
 
 export type EditorActionFunction = (onAction: () => void) => React.ReactNode;
-export type EditorMode = 'text' | 'file' | 'attachment';
+export type EditorMode = 'text' | 'file' | 'attachment' | 'dynamic';

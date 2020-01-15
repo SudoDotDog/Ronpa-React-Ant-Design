@@ -31,8 +31,9 @@ import { RonpaComments } from "../src/index";
                         path: 'https://google.com/robots.txt',
                         uploadedAt: new Date(),
                     })}
-                    editorMode={'attachment'}
+                    editorMode="dynamic"
                     onAction={(action) => {
+                        console.log(action);
                         const ronpa = this.state.ronpa;
                         ronpa.apply(action);
                         this.setState({

@@ -4,7 +4,6 @@
  * @description Static Editor
  */
 
-import { mergeClasses } from "@sudoo/jss";
 import { Button, Comment, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
