@@ -42,9 +42,9 @@ import { RonpaAttachmentEditor } from "../../src/index";
     username="Jack"
     uploadFile={mockUploadFunction}
     onAction={console.log}
-    actions={(onAction) => (
+    actions={(onAction, shouldEmit) => (
       <Button.Group style={{marginTop: '5px'}}>
-        <Button onClick={onAction}>Customized Action 1</Button>
+        <Button onClick={onAction} disabled={!shouldEmit()}>Customized Action 1</Button>
         <Button onClick={onAction} type="primary">Customized Action 2 (Primary)</Button>
         <Button onClick={onAction} disabled>Customized Action 3 (Disabled)</Button>
       </Button.Group>
