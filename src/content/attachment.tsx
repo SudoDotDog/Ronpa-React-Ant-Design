@@ -32,7 +32,6 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
     public render() {
 
         const text: string = this.props.content.text;
-        const files: FileContent[] = this.props.content.files;
 
         return (<RonpaTextContent
             style={this.props.style}
@@ -42,13 +41,24 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
             content={text}
             contentLimit={this.props.contentLimit}
         >
-            <List
-                className={this._contentStyle.list}
-                bordered
-            >
-                {files.map(this._renderFile)}
-            </List>
+            {this._renderFileList()}
         </RonpaTextContent>);
+    }
+
+    private _renderFileList() {
+
+        const files: FileContent[] = this.props.content.files;
+
+        if (!files || files.length === 0) {
+            return null;
+        }
+
+        return (<List
+            className={this._contentStyle.list}
+            bordered
+        >
+            {files.map(this._renderFile)}
+        </List>);
     }
 
     private _renderFile(file: FileContent) {

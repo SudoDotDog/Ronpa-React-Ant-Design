@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design_Editor
- * @description Attachment Editor
+ * @description Dynamic Editor
  */
 
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
@@ -170,9 +170,34 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
         if (this.props.onAction) {
 
-            this.props.onAction(this._createAttachmentAction());
+            if (this.state.files.length === 0) {
+                this.props.onAction(this._createTextAction());
+            } else {
+                this.props.onAction(this._createAttachmentAction());
+            }
         }
         return;
+    }
+
+    private _createTextAction(): ChangeType<any, RECORD_TYPE.TEXT> {
+
+        if (this.props.story) {
+
+            return draftAddReplyChange({
+                by: this.props.username,
+                content: this.state.content,
+                story: this.props.story,
+                reply: this.props.reply,
+                type: RECORD_TYPE.TEXT,
+            });
+        }
+
+        return draftAddThesisChange({
+            by: this.props.username,
+            content: this.state.content,
+            insiders: this.props.insiders ?? [],
+            type: RECORD_TYPE.TEXT,
+        });
     }
 
     private _uploadFile(files: File[]) {
