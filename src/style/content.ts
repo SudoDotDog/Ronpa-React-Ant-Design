@@ -36,6 +36,13 @@ const contentStyleBase: JSSStyle = {
         paddingTop: '5px !important',
         paddingBottom: '5px !important',
     },
+    itemMeta: {
+        '@global': {
+            '.ant-list-item-meta-title': {
+                marginBottom: '0px',
+            },
+        },
+    },
 };
 
 export const contentStyle: StyleManager = StyleManager.create(contentStyleBase, 'Content').setPrefix('Ronpa-React-Ant-Design-');

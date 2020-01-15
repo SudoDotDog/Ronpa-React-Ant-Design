@@ -72,6 +72,7 @@ export class RonpaAttachmentContent extends React.Component<RonpaAttachmentConte
             ]}
         >
             <List.Item.Meta
+                className={this._contentStyle.itemMeta}
                 avatar={<Avatar shape="square">
                     <FileIcon mimeType={file.mimeType} />
                 </Avatar>}
