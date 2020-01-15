@@ -19,7 +19,7 @@ const contentStyleBase: JSSStyle = {
         overflow: 'hidden',
     },
     list: {
-        marginTop: '15px !important',
+        marginTop: '8px !important',
     },
     restButton: {
         userSelect: 'none',

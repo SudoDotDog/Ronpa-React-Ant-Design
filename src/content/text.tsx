@@ -4,7 +4,6 @@
  * @description Text
  */
 
-import { Icon } from "antd";
 import * as React from "react";
 import { ContentType, RECORD_TYPE } from "ronpa";
 import { contentStyle } from "../style/content";

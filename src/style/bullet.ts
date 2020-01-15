@@ -11,6 +11,17 @@ const bulletStyleBase: JSSStyle = {
     activeReaction: {
         color: 'black !important',
     },
+    commentCover: {
+        '@global': {
+            '.ant-comment-inner': {
+                paddingTop: '6px',
+                paddingBottom: '6px',
+            },
+            '.ant-comment-nested': {
+                marginLeft: '24px',
+            },
+        },
+    },
 };
 
 export const bulletStyle: StyleManager = StyleManager.create(bulletStyleBase, 'Bullet').setPrefix('Ronpa-React-Ant-Design-');
