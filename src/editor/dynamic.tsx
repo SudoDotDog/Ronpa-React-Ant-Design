@@ -17,7 +17,7 @@ import { RonpaEditorBaseProps, RonpaEditorUploadResult } from "./type";
 
 type UploadingFile = Pick<FileContent, 'id' | 'originalName' | 'mimeType' | 'size' | 'lastModifyAt'>;
 
-export type RonpaAttachmentEditorStates = {
+export type RonpaDynamicEditorStates = {
 
     readonly content: string;
     readonly files: FileContent[];
@@ -25,9 +25,9 @@ export type RonpaAttachmentEditorStates = {
     readonly dragHover: boolean;
 };
 
-export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps, RonpaAttachmentEditorStates> {
+export class RonpaDynamicEditor extends React.Component<RonpaEditorBaseProps, RonpaDynamicEditorStates> {
 
-    public readonly state: RonpaAttachmentEditorStates = {
+    public readonly state: RonpaDynamicEditorStates = {
 
         content: '',
         files: [],
@@ -172,6 +172,8 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
             if (this.state.files.length === 0) {
                 this.props.onAction(this._createTextAction());
+            } else if (this.state.content.length === 0) {
+                this.props.onAction(this._createFileAction());
             } else {
                 this.props.onAction(this._createAttachmentAction());
             }
@@ -249,13 +251,15 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
     private _createAttachmentAction(): ChangeType<any, RECORD_TYPE.ATTACHMENT> {
 
+        const files: FileContent[] = [...this.state.files];
+
         if (this.props.story) {
 
             return draftAddReplyChange({
                 by: this.props.username,
                 content: {
                     text: this.state.content,
-                    files: this.state.files,
+                    files,
                 },
                 story: this.props.story,
                 reply: this.props.reply,
@@ -267,10 +271,33 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
             by: this.props.username,
             content: {
                 text: this.state.content,
-                files: this.state.files,
+                files,
             },
             insiders: this.props.insiders ?? [],
             type: RECORD_TYPE.ATTACHMENT,
+        });
+    }
+
+    private _createFileAction(): ChangeType<any, RECORD_TYPE.FILE> {
+
+        const files: FileContent[] = [...this.state.files];
+
+        if (this.props.story) {
+
+            return draftAddReplyChange({
+                by: this.props.username,
+                content: files,
+                story: this.props.story,
+                reply: this.props.reply,
+                type: RECORD_TYPE.FILE,
+            });
+        }
+
+        return draftAddThesisChange({
+            by: this.props.username,
+            content: files,
+            insiders: this.props.insiders ?? [],
+            type: RECORD_TYPE.FILE,
         });
     }
 

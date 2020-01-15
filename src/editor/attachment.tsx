@@ -224,13 +224,15 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
 
     private _createAttachmentAction(): ChangeType<any, RECORD_TYPE.ATTACHMENT> {
 
+        const files: FileContent[] = [...this.state.files];
+
         if (this.props.story) {
 
             return draftAddReplyChange({
                 by: this.props.username,
                 content: {
                     text: this.state.content,
-                    files: this.state.files,
+                    files,
                 },
                 story: this.props.story,
                 reply: this.props.reply,
@@ -242,7 +244,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
             by: this.props.username,
             content: {
                 text: this.state.content,
-                files: this.state.files,
+                files,
             },
             insiders: this.props.insiders ?? [],
             type: RECORD_TYPE.ATTACHMENT,

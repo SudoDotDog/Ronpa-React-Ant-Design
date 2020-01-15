@@ -179,11 +179,13 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
 
     private _createFileAction(fileContents: FileContent[]): ChangeType<any, RECORD_TYPE.FILE> {
 
+        const files: FileContent[] = [...fileContents];
+
         if (this.props.story) {
 
             return draftAddReplyChange({
                 by: this.props.username,
-                content: fileContents,
+                content: files,
                 story: this.props.story,
                 reply: this.props.reply,
                 type: RECORD_TYPE.FILE,
@@ -192,7 +194,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
 
         return draftAddThesisChange({
             by: this.props.username,
-            content: fileContents,
+            content: files,
             insiders: this.props.insiders ?? [],
             type: RECORD_TYPE.FILE,
         });

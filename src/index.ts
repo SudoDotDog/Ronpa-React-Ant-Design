@@ -19,6 +19,7 @@ export * from "./content/text";
 export * from "./content/type";
 export * from "./declare";
 export * from "./editor/attachment";
+export * from "./editor/dynamic";
 export * from "./editor/editor";
 export * from "./editor/file";
 export * from "./editor/static";
