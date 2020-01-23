@@ -8,4 +8,14 @@ export default {
     title: 'Ronpa React Ant Design',
     codeSandbox: false,
     typescript: true,
-}
+    modifyBundlerConfig: (bundlerConfig) => {
+        const rules = [
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            }
+        ];
+        bundlerConfig.module.rules.push(...rules);
+        return bundlerConfig;
+    },
+};
