@@ -5,7 +5,7 @@
  */
 
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
-import { Comment, Icon, Tag } from "antd";
+import { Comment, Icon, Tag, Tooltip } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
 import { RonpaAttachmentContent } from "../content/attachment";
@@ -88,10 +88,36 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
     private _renderAuthor(bullet: Bullet<any>) {
 
         return (<span className={this._bulletStyle.author}>
-            {bullet.isRobot && <Tag title="Robot" color="magenta"><Icon type="robot" /></Tag>}
-            {bullet.isGenerated && <Tag title="Generated" color="orange"><Icon type="api" /></Tag>}
+            {this._renderRobotIcon(bullet)}
+            {this._renderGeneratedIcon(bullet)}
             {bullet.by}
         </span>)
+    }
+
+    private _renderRobotIcon(bullet: Bullet<any>) {
+
+        if (!bullet.isRobot) {
+            return null;
+        }
+
+        return (<Tooltip title="Robot">
+            <Tag color="magenta">
+                <Icon type="robot" />
+            </Tag>
+        </Tooltip>);
+    }
+
+    private _renderGeneratedIcon(bullet: Bullet<any>) {
+
+        if (!bullet.isGenerated) {
+            return null;
+        }
+
+        return (<Tooltip title="Generated">
+            <Tag color="orange">
+                <Icon type="api" />
+            </Tag>
+        </Tooltip>);
     }
 
     private _renderContent() {

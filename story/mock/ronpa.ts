@@ -29,6 +29,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
         at: new Date(),
         by: chance.name(),
         reactions: [...reactions],
+        isRobot: true,
         story: story.id,
     });
 
@@ -105,6 +106,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
         },
         at: new Date(),
         by: chance.name(),
+        isGenerated: true,
         story: secondStory.id,
     });
 
