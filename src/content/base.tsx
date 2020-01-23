@@ -14,11 +14,6 @@ export class RonpaBaseContent extends React.Component<RonpaContentBaseProps> {
 
     private readonly _contentStyle = contentStyle.use();
 
-    public constructor(props: RonpaContentBaseProps) {
-
-        super(props);
-    }
-
     public render() {
 
         if (!this.props.thesis || this.props.thesis.insiders.length === 0) {

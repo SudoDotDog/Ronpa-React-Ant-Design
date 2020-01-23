@@ -6,7 +6,6 @@
 
 import * as React from "react";
 import { ContentType, RECORD_TYPE } from "ronpa";
-import { contentStyle } from "../style/content";
 import { RonpaBaseContent } from "./base";
 import { RonpaCommonFile } from "./common-file";
 import { RonpaContentBaseProps } from "./type";
@@ -17,13 +16,6 @@ export type RonpaFileContentProps = {
 } & RonpaContentBaseProps;
 
 export class RonpaFileContent extends React.Component<RonpaFileContentProps> {
-
-    private readonly _contentStyle = contentStyle.use();
-
-    public constructor(props: RonpaFileContentProps) {
-
-        super(props);
-    }
 
     public render() {
 
