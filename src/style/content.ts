@@ -18,9 +18,6 @@ const contentStyleBase: JSSStyle = {
         transition: '0.3s all',
         overflow: 'hidden',
     },
-    list: {
-        marginTop: '8px !important',
-    },
     restButton: {
         userSelect: 'none',
         cursor: 'pointer',
@@ -29,18 +26,6 @@ const contentStyleBase: JSSStyle = {
 
         '&:hover': {
             textDecoration: 'underline',
-        },
-    },
-    itemEach: {
-        padding: '8px !important',
-        paddingTop: '5px !important',
-        paddingBottom: '5px !important',
-    },
-    itemMeta: {
-        '@global': {
-            '.ant-list-item-meta-title': {
-                marginBottom: '0px',
-            },
         },
     },
 };
