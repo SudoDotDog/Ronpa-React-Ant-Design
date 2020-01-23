@@ -5,11 +5,10 @@
  */
 
 import { transformSize } from "@sudoo/numeric";
-import { Avatar, List } from "antd";
+import { Avatar } from "antd";
 import * as React from "react";
-import { ContentType, FileContent, RECORD_TYPE } from "ronpa";
+import { FileContent } from "ronpa";
 import { fileStyle } from "../style/file";
-import { RonpaBaseContent } from "./base";
 import { FileIcon } from "./file-icon";
 
 export type RonpaCommonFileProps = {
@@ -46,7 +45,10 @@ export class RonpaCommonFile extends React.PureComponent<RonpaCommonFileProps> {
         >
             <div className={this._fileStyle.icon}>
                 <Avatar shape="square">
-                    <FileIcon mimeType={file.mimeType} />
+                    <FileIcon
+                        mimeType={file.mimeType}
+                        large={true}
+                    />
                 </Avatar>
             </div>
             <div className={this._fileStyle.name}>

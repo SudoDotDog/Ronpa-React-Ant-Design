@@ -11,7 +11,7 @@ import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
 import { ChangeType, draftAddReplyChange, draftAddThesisChange, FileContent, RECORD_TYPE } from "ronpa";
-import { getIconName } from "../content/file-icon";
+import { FileIcon } from "../content/file-icon";
 import { editorStyle } from "../style/editor";
 import { RonpaEditorBaseProps, RonpaEditorUploadResult } from "./type";
 
@@ -149,7 +149,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                         files: this.state.files.filter((current: FileContent) => current.id !== file.id),
                     });
                 }}
-            ><Icon type={getIconName(file.mimeType)} /> {file.originalName}</Tag>)}
+            ><FileIcon mimeType={file.mimeType} /> {file.originalName}</Tag>)}
         </div>);
     }
 

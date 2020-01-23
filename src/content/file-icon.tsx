@@ -10,31 +10,44 @@ import * as React from "react";
 export type FileIconProps = {
 
     readonly mimeType: string;
+    readonly large?: boolean;
 };
 
-export const getIconName = (mimeType: string): string => {
+export class FileIcon extends React.PureComponent<FileIconProps> {
 
-    if (mimeType.startsWith('text/')) {
-        return "file-text";
-    } else if (mimeType.startsWith('image/')) {
-        return "file-image";
-    } else if (mimeType.startsWith('video/')) {
-        return "file-exclamation";
-    } else if (mimeType.startsWith('audio/')) {
-        return "file-exclamation";
+    public render() {
+
+        const iconName: string = this._getIconName(this.props.mimeType);
+        return this.props.large ? this._renderLarge(iconName) : this._renderRegular(iconName);
     }
-    return "file-unknown";
-};
 
-export const FileIcon: React.FC<FileIconProps> = (props: FileIconProps) => {
+    private _renderRegular(iconName: string) {
 
-    const iconName: string = getIconName(props.mimeType);
+        return (<Icon type={iconName} />);
+    }
 
-    return (<Icon
-        type={iconName}
-        theme="filled"
-        style={{
-            fontSize: '15px',
-        }}
-    />);
-};
+    private _renderLarge(iconName: string) {
+
+        return (<Icon
+            type={iconName}
+            theme="filled"
+            style={{
+                fontSize: '15px',
+            }}
+        />);
+    }
+
+    private _getIconName(mimeType: string): string {
+
+        if (mimeType.startsWith('text/')) {
+            return "file-text";
+        } else if (mimeType.startsWith('image/')) {
+            return "file-image";
+        } else if (mimeType.startsWith('video/')) {
+            return "file-exclamation";
+        } else if (mimeType.startsWith('audio/')) {
+            return "file-exclamation";
+        }
+        return "file-unknown";
+    }
+}
