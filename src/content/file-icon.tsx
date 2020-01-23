@@ -39,6 +39,7 @@ export class FileIcon extends React.PureComponent<FileIconProps> {
 
     private _getIconName(mimeType: string): string {
 
+        /* cSpell:disable */
         if (mimeType.startsWith('text/')) {
             return "file-text";
         } else if (mimeType.startsWith('image/')) {
@@ -47,7 +48,18 @@ export class FileIcon extends React.PureComponent<FileIconProps> {
             return "file-exclamation";
         } else if (mimeType.startsWith('audio/')) {
             return "file-exclamation";
+        } else if (mimeType === 'application/pdf') {
+            return "file-pdf";
+        } else if (mimeType.includes('word') || mimeType.includes('officedocument.wordprocessingml')) {
+            return "file-word";
+        } else if (mimeType.includes('excel') || mimeType.includes('officedocument.spreadsheetml')) {
+            return "file-excel";
+        } else if (mimeType.includes('powerpoint') || mimeType.includes('officedocument.presentationml')) {
+            return "file-ppt";
+        } else if (mimeType.includes('zip')) {
+            return "file-zip";
         }
         return "file-unknown";
+        /* cSpell:enable */
     }
 }

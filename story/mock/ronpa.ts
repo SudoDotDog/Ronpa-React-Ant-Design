@@ -81,6 +81,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
     ronpa.addStory(story);
     const secondStory: Story = ronpa.createAndGetStory(username, chance.paragraph());
 
+    /* cSpell:disable */
     const bullet3: Bullet<RECORD_TYPE.ATTACHMENT> = Bullet.fromRecord<RECORD_TYPE.ATTACHMENT>({
         type: RECORD_TYPE.ATTACHMENT,
         id: chance.string(),
@@ -89,17 +90,41 @@ export const createMockRonpa = (username?: string): Ronpa => {
             files: [{
                 id: "first",
                 path: "https://google.com/robots.txt",
-                originalName: "first-file.ogg",
-                mimeType: "video/ogg",
+                originalName: "a-ppt-file.pptx",
+                mimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
                 size: 135662,
                 lastModifyAt: new Date(),
                 uploadedAt: new Date(),
             }, {
                 id: "second",
                 path: "https://google.com/robots.txt",
-                originalName: "second-file.jpeg",
-                mimeType: "image/jpeg",
+                originalName: "a-word-file.docx",
+                mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 size: 5124820,
+                lastModifyAt: new Date(),
+                uploadedAt: new Date(),
+            }, {
+                id: "third",
+                path: "https://google.com/robots.txt",
+                originalName: "a-excel-file.xlsx",
+                mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                size: 120584,
+                lastModifyAt: new Date(),
+                uploadedAt: new Date(),
+            }, {
+                id: "fourth",
+                path: "https://google.com/robots.txt",
+                originalName: "a-zip-file.zip",
+                mimeType: "application/zip",
+                size: 1729624,
+                lastModifyAt: new Date(),
+                uploadedAt: new Date(),
+            }, {
+                id: "fifth",
+                path: "https://google.com/robots.txt",
+                originalName: "a-pdf-file.pdf",
+                mimeType: "application/pdf",
+                size: 521003,
                 lastModifyAt: new Date(),
                 uploadedAt: new Date(),
             }],
@@ -109,6 +134,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
         isGenerated: true,
         story: secondStory.id,
     });
+    /* cSpell:enable */
 
     secondStory.addBullet(bullet3);
 
