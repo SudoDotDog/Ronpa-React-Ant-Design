@@ -30,32 +30,34 @@ export class RonpaCommonFile extends React.PureComponent<RonpaCommonFileProps> {
 
     public render() {
 
-        return (<List
+        return (<div
             className={this._fileStyle.list}
-            bordered
         >
             {this.props.files.map(this._renderFile)}
-        </List>);
+        </div>);
     }
 
     private _renderFile(file: FileContent) {
 
         const sizeText: string = file.size ? transformSize(file.size) : 'Unknown';
-        return (<List.Item
-            className={this._fileStyle.itemEach}
+        return (<div
+            className={this._fileStyle.item}
             key={file.id}
-            actions={[
-                (<a onClick={() => window.open(file.path)}>View</a>),
-            ]}
         >
-            <List.Item.Meta
-                className={this._fileStyle.itemMeta}
-                avatar={<Avatar shape="square">
+            <div className={this._fileStyle.icon}>
+                <Avatar shape="square">
                     <FileIcon mimeType={file.mimeType} />
-                </Avatar>}
-                title={file.originalName}
-                description={sizeText}
-            />
-        </List.Item>);
+                </Avatar>
+            </div>
+            <div className={this._fileStyle.name}>
+                {file.originalName}
+            </div>
+            <div className={this._fileStyle.size}>
+                {sizeText}
+            </div>
+            <div className={this._fileStyle.action}>
+                <a onClick={() => window.open(file.path)}>View</a>
+            </div>
+        </div>);
     }
 }

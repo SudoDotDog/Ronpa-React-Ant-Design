@@ -13,6 +13,7 @@ export * from "./components/ronpa";
 export * from "./components/story";
 export * from "./content/attachment";
 export * from "./content/base";
+export * from "./content/common-file";
 export * from "./content/file";
 export * from "./content/file-icon";
 export * from "./content/text";
