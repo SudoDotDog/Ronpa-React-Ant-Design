@@ -54,7 +54,7 @@ export class RonpaFileContent extends React.Component<RonpaFileContentProps> {
             className={this._contentStyle.itemEach}
             key={file.id}
             actions={[
-                (<a onClick={() => window.open(file.path)}><Icon type="download" /> Download</a>),
+                (<a onClick={() => window.open(file.path)}>View</a>),
             ]}
         >
             <List.Item.Meta

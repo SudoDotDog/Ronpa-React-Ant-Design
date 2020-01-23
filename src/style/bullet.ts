@@ -20,6 +20,9 @@ const bulletStyleBase: JSSStyle = {
             '.ant-comment-nested': {
                 marginLeft: '24px',
             },
+            '.ant-comment-content-author': {
+                alignItems: 'center',
+            },
         },
     },
     author: {
