@@ -22,6 +22,9 @@ const bulletStyleBase: JSSStyle = {
             },
         },
     },
+    author: {
+        fontSize: '14px',
+    },
 };
 
 export const bulletStyle: StyleManager = StyleManager.create(bulletStyleBase, 'Bullet').setPrefix('Ronpa-React-Ant-Design-');
