@@ -21,7 +21,8 @@ const fileStyleBase: JSSStyle = {
         ].join(''),
         gridTemplateColumns: 'auto 1fr auto',
         gridTemplateRows: '1fr auto',
-        gridColumnGap: '10px',
+
+        columnGap: '10px',
 
         paddingTop: '5px',
         paddingBottom: '5px',
