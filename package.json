@@ -23,9 +23,9 @@
     "ronpa": "*"
   },
   "dependencies": {
-    "@sudoo/jss": "^1.3.1",
+    "@sudoo/jss": "^1.4.0",
     "@sudoo/numeric": "^1.0.9",
-    "@sudoo/random": "^2.0.4",
+    "@sudoo/random": "^2.1.0",
     "react-dropzone": "^10.2.1"
   },
   "devDependencies": {
