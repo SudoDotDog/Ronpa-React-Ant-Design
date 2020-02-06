@@ -23,6 +23,23 @@ export const createMockBullet = (username?: string) => {
     return bullet;
 };
 
+export const createMockRobotAndGeneratedBullet = (username?: string) => {
+
+    const chance: Chance.Chance = new Chance('mock-bullet');
+
+    const bullet: Bullet = Bullet.fromRecord({
+        id: chance.string(),
+        content: chance.paragraph(),
+        at: new Date(),
+        by: username,
+        story: chance.string(),
+        isRobot: true,
+        isGenerated: true,
+    });
+
+    return bullet;
+};
+
 export const createMockLongContentBullet = (username?: string) => {
 
     const chance: Chance.Chance = new Chance('mock-bullet');

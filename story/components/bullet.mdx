@@ -4,7 +4,7 @@ name: Bullet
 ---
 
 import { Playground } from "docz";
-import { createMockBullet, createMockLongContentBullet } from "../mock/bullet"
+import { createMockBullet, createMockLongContentBullet, createMockRobotAndGeneratedBullet } from "../mock/bullet"
 import { RonpaBullet } from "../../src/index";
 import 'antd/dist/antd.css';
 
@@ -16,7 +16,7 @@ import 'antd/dist/antd.css';
     <RonpaBullet
         username="Jack"
         storyId="test"
-        bullet={createMockBullet()}
+        bullet={createMockBullet('Someone')}
         onAction={console.log}
     />
 </Playground>
@@ -27,8 +27,19 @@ import 'antd/dist/antd.css';
     <RonpaBullet
         username="Jack"
         storyId="test"
-        bullet={createMockLongContentBullet()}
+        bullet={createMockLongContentBullet('Jack')}
         contentLimit={512}
+        onAction={console.log}
+    />
+</Playground>
+
+## Robot & Generated
+
+<Playground>
+    <RonpaBullet
+        username="Jack"
+        storyId="test"
+        bullet={createMockRobotAndGeneratedBullet('Robot')}
         onAction={console.log}
     />
 </Playground>
