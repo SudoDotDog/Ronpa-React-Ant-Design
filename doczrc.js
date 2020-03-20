@@ -6,6 +6,6 @@
 
 export default {
     title: 'Ronpa React Ant Design',
-    files: 'story/**/*.{md,markdown,mdx}',
+    files: '**/*.{md,markdown,mdx}',
     typescript: true,
 };
