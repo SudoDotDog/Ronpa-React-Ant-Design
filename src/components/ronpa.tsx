@@ -27,6 +27,7 @@ export type RonpaCommentsProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
+    readonly getAbbreviation?: (author: string) => string | React.ReactNode;
     readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult> | RonpaEditorUploadResult;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
     readonly editorMode?: EditorMode;
@@ -72,6 +73,7 @@ export class RonpaComments extends React.Component<RonpaCommentsProps> {
             reactions={this.props.reactions}
 
             getAvatar={this.props.getAvatar}
+            getAbbreviation={this.props.getAbbreviation}
             uploadFile={this.props.uploadFile}
             onAction={this._emitChange}
             editorMode={this.props.editorMode}

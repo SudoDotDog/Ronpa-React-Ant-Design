@@ -63,6 +63,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             reply={this.props.reply}
 
             getAvatar={this.props.getAvatar}
+            getAbbreviation={this.props.getAbbreviation}
             onAction={this.props.onAction}
 
             actions={this.props.actions}
@@ -81,6 +82,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             reply={this.props.reply}
 
             getAvatar={this.props.getAvatar}
+            getAbbreviation={this.props.getAbbreviation}
             uploadFile={this.props.uploadFile}
             onAction={this.props.onAction}
 
@@ -100,6 +102,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             reply={this.props.reply}
 
             getAvatar={this.props.getAvatar}
+            getAbbreviation={this.props.getAbbreviation}
             uploadFile={this.props.uploadFile}
             onAction={this.props.onAction}
 
@@ -119,6 +122,7 @@ export class RonpaEditor extends React.Component<RonpaEditorProps> {
             reply={this.props.reply}
 
             getAvatar={this.props.getAvatar}
+            getAbbreviation={this.props.getAbbreviation}
             uploadFile={this.props.uploadFile}
             onAction={this.props.onAction}
 
