@@ -4,9 +4,9 @@
  * @description Ronpa
  */
 
-import { JSSStyle, StyleManager } from "@sudoo/jss";
+import { StyleManager, Styles } from "@sudoo/jss";
 
-const ronpaStyleBase: JSSStyle = {
+const ronpaStyleBase: Styles = {
 };
 
 export const ronpaStyle: StyleManager = StyleManager.create(ronpaStyleBase, 'Ronpa').setPrefix('Ronpa-React-Ant-Design-');

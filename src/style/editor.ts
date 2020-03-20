@@ -4,9 +4,9 @@
  * @description Editor
  */
 
-import { JSSStyle, StyleManager } from "@sudoo/jss";
+import { StyleManager, Styles } from "@sudoo/jss";
 
-const editorStyleBase: JSSStyle = {
+const editorStyleBase: Styles = {
 
     editor: {
         transition: '0.2s all',
@@ -24,7 +24,7 @@ const editorStyleBase: JSSStyle = {
         borderTop: '1px solid transparent !important',
         borderTopLeftRadius: '0 !important',
         borderTopRightRadius: '0 !important',
-        textAlign: 'left !important',
+        textAlign: 'left !important' as any as 'left',
         '&:hover': {
             border: '1px solid #40a9ff !important',
         },

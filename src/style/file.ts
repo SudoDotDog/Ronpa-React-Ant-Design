@@ -4,9 +4,9 @@
  * @description File
  */
 
-import { JSSStyle, StyleManager } from "@sudoo/jss";
+import { StyleManager, Styles } from "@sudoo/jss";
 
-const fileStyleBase: JSSStyle = {
+const fileStyleBase: Styles = {
 
     list: {
         marginTop: '6px',

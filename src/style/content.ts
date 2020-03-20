@@ -4,9 +4,9 @@
  * @description Content
  */
 
-import { JSSStyle, StyleManager } from "@sudoo/jss";
+import { StyleManager, Styles } from "@sudoo/jss";
 
-const contentStyleBase: JSSStyle = {
+const contentStyleBase: Styles = {
 
     content: {
         whiteSpace: 'pre-wrap',

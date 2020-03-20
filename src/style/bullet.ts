@@ -4,9 +4,9 @@
  * @description Bullet
  */
 
-import { JSSStyle, StyleManager } from "@sudoo/jss";
+import { StyleManager, Styles } from "@sudoo/jss";
 
-const bulletStyleBase: JSSStyle = {
+const bulletStyleBase: Styles = {
 
     activeReaction: {
         color: 'black !important',
