@@ -19,7 +19,6 @@ coverage
 
 # Build
 app
-.docz
 
 # Lockfile
 yarn.lock
