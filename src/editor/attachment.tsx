@@ -4,9 +4,10 @@
  * @description Attachment Editor
  */
 
+import { LoadingOutlined, PaperClipOutlined } from "@ant-design/icons";
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
 import { randomUnique } from "@sudoo/random";
-import { Button, Comment, Icon, Input, Tag } from "antd";
+import { Button, Comment, Input, Tag } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
@@ -94,7 +95,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                                 )}
                                 onClick={state.open}
                             >
-                                <Icon type="paper-clip" />
+                                <PaperClipOutlined />
                                 Drag or Click
                             </Button>
                             <div
@@ -109,7 +110,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
                                     ),
                                 })}
                             >
-                                <Icon type="paper-clip" />&nbsp;
+                                <PaperClipOutlined />&nbsp;
                                 Release to Upload
                             </div>
                         </div>);
@@ -163,7 +164,7 @@ export class RonpaAttachmentEditor extends React.Component<RonpaEditorBaseProps,
             {this.state.uploading.map((file: UploadingFile) => <Tag
                 key={file.id}
                 color="orange"
-            ><Icon type="loading" /> {file.originalName}</Tag>)}
+            ><LoadingOutlined /> {file.originalName}</Tag>)}
         </div>);
     }
 

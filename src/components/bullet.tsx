@@ -4,8 +4,9 @@
  * @description Bullet
  */
 
+import { ApiOutlined, RobotOutlined } from "@ant-design/icons";
 import { assertIfTrue, mergeClasses } from "@sudoo/jss";
-import { Comment, Icon, Tag, Tooltip } from "antd";
+import { Comment, Tag, Tooltip } from "antd";
 import * as React from "react";
 import { Bullet, ChangeType, draftAddReactionChange, draftRemoveReactionChange, RECORD_TYPE, RONPA_ACTION, Thesis } from "ronpa";
 import { RonpaAttachmentContent } from "../content/attachment";
@@ -102,7 +103,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
 
         return (<Tooltip title="Robot">
             <Tag color="magenta">
-                <Icon type="robot" />
+                <RobotOutlined />
             </Tag>
         </Tooltip>);
     }
@@ -115,7 +116,7 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
 
         return (<Tooltip title="Generated">
             <Tag color="orange">
-                <Icon type="api" />
+                <ApiOutlined />
             </Tag>
         </Tooltip>);
     }

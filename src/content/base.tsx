@@ -4,8 +4,8 @@
  * @description Base
  */
 
+import { TeamOutlined } from "@ant-design/icons";
 import { mergeClasses } from "@sudoo/jss";
-import { Icon } from "antd";
 import * as React from "react";
 import { contentStyle } from "../style/content";
 import { RonpaContentBaseProps } from "./type";
@@ -45,7 +45,7 @@ export class RonpaBaseContent extends React.Component<RonpaContentBaseProps> {
     private _renderInsiders(insiders: string[]) {
 
         return (<div>
-            <Icon type="team" />
+            <TeamOutlined />
             {insiders.map((name: string) =>
                 (<span
                     key={name}

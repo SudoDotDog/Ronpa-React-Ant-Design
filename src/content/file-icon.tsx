@@ -4,8 +4,9 @@
  * @description File Icon
  */
 
-import { Icon } from "antd";
 import * as React from "react";
+import Icon, { FileTextFilled, FileImageFilled, FileExcelFilled, FileExclamationFilled, FilePdfFilled, FileWordFilled, FilePptFilled, FileZipFilled, FileUnknownFilled } from "@ant-design/icons";
+import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
 
 export type FileIconProps = {
 
@@ -17,49 +18,35 @@ export class FileIcon extends React.PureComponent<FileIconProps> {
 
     public render() {
 
-        const iconName: string = this._getIconName(this.props.mimeType);
-        return this.props.large ? this._renderLarge(iconName) : this._renderRegular(iconName);
+        const IconComponent: React.ComponentType<AntdIconProps> = this._getIconComponent(this.props.mimeType);
+        return this.props.large
+            ? (<IconComponent style={{ fontSize: '15px' }} />)
+            : (<IconComponent />);
     }
 
-    private _renderRegular(iconName: string) {
-
-        return (<Icon type={iconName} />);
-    }
-
-    private _renderLarge(iconName: string) {
-
-        return (<Icon
-            type={iconName}
-            theme="filled"
-            style={{
-                fontSize: '15px',
-            }}
-        />);
-    }
-
-    private _getIconName(mimeType: string): string {
+    private _getIconComponent(mimeType: string): React.ComponentType<AntdIconProps> {
 
         /* cSpell:disable */
         if (mimeType.startsWith('text/')) {
-            return "file-text";
+            return FileTextFilled;
         } else if (mimeType.startsWith('image/')) {
-            return "file-image";
+            return FileImageFilled;
         } else if (mimeType.startsWith('video/')) {
-            return "file-exclamation";
+            return FileExcelFilled;
         } else if (mimeType.startsWith('audio/')) {
-            return "file-exclamation";
+            return FileExclamationFilled;
         } else if (mimeType === 'application/pdf') {
-            return "file-pdf";
+            return FilePdfFilled;
         } else if (mimeType.includes('word') || mimeType.includes('officedocument.wordprocessingml')) {
-            return "file-word";
+            return FileWordFilled;
         } else if (mimeType.includes('excel') || mimeType.includes('officedocument.spreadsheetml')) {
-            return "file-excel";
+            return FileExcelFilled;
         } else if (mimeType.includes('powerpoint') || mimeType.includes('officedocument.presentationml')) {
-            return "file-ppt";
+            return FilePptFilled;
         } else if (mimeType.includes('zip')) {
-            return "file-zip";
+            return FileZipFilled;
         }
-        return "file-unknown";
+        return FileUnknownFilled;
         /* cSpell:enable */
     }
 }
