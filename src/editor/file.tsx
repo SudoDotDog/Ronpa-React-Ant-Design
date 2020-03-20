@@ -4,9 +4,10 @@
  * @description File Editor
  */
 
+import { PaperClipOutlined } from "@ant-design/icons";
 import { assertIfTri, mergeClasses } from "@sudoo/jss";
 import { randomUnique } from "@sudoo/random";
-import { Button, Comment, Icon, Input } from "antd";
+import { Button, Comment, Input } from "antd";
 import { Classes } from "jss";
 import * as React from "react";
 import Dropzone, { DropzoneState } from "react-dropzone";
@@ -85,7 +86,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
                                 )}
                                 onClick={state.open}
                             >
-                                <Icon type="paper-clip" />
+                                <PaperClipOutlined />
                                 Drag or Click
                             </Button>
                             <div
@@ -100,7 +101,7 @@ export class RonpaFileEditor extends React.Component<RonpaEditorBaseProps, Ronpa
                                     ),
                                 })}
                             >
-                                <Icon type="paper-clip" />&nbsp;
+                                <PaperClipOutlined />&nbsp;
                                 Release to Upload
                             </div>
                         </div>);
