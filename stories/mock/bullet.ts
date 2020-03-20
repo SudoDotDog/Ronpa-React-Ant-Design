@@ -16,7 +16,7 @@ export const createMockBullet = (username?: string) => {
         id: chance.string(),
         content: chance.paragraph(),
         at: new Date(),
-        by: username,
+        by: username ?? '',
         story: chance.string(),
     });
 
@@ -31,7 +31,7 @@ export const createMockRobotAndGeneratedBullet = (username?: string) => {
         id: chance.string(),
         content: chance.paragraph(),
         at: new Date(),
-        by: username,
+        by: username ?? '',
         story: chance.string(),
         isRobot: true,
         isGenerated: true,
@@ -54,7 +54,7 @@ export const createMockLongContentBullet = (username?: string) => {
             sentences: 16,
         })}`,
         at: new Date(),
-        by: username,
+        by: username ?? '',
         story: chance.string(),
     });
 

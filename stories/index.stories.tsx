@@ -1,3 +1,10 @@
+/**
+ * @author WMXPY
+ * @namespace React_Ant_Design_Stories
+ * @description Components
+ * @override Action
+ */
+
 import * as React from 'react';
 import { Button } from 'antd';
 import { RonpaComments } from "../src";
