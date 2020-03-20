@@ -1,28 +1,30 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design_Stories
- * @description Components
+ * @description Example
  * @override Action
  */
 
-import * as React from 'react';
-import { Button } from 'antd';
-import { RonpaComments } from "../src";
-import { createMockRonpa } from "./mock/ronpa";
 import 'antd/dist/antd.css';
+import * as React from 'react';
+import { RonpaComments } from "../../src/index";
+import { createMockRonpa } from "../mock/ronpa";
+import { Button } from 'antd';
 
-export default { title: 'Button' };
+export default {
+    title: 'Example/Action',
+    component: RonpaComments,
+};
 
-export const withText = () => <Button>Hello Button</Button>;
+export const CustomizedActionsUsage = () => {
 
-export const withEmoji = () => (
-    <RonpaComments
+    return (<RonpaComments
         contentStyle={{
             fontStyle: 'italic',
         }}
         contentLimit={100}
         username="Jack"
-        uploadFile={async () => ({
+        uploadFile={() => ({
             path: 'https://google.com/robots.txt',
             uploadedAt: new Date(),
         })}
@@ -44,5 +46,5 @@ export const withEmoji = () => (
                 <Button onClick={onAction} disabled>Customized Action 3 (Disabled)</Button>
             </Button.Group>
         )}
-    />
-);
+    />);
+};
