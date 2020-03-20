@@ -5,6 +5,7 @@
  * @override Bullet
  */
 
+import { action } from '@storybook/addon-actions';
 import 'antd/dist/antd.css';
 import * as React from 'react';
 import { RonpaBullet } from "../../src/index";
@@ -21,7 +22,7 @@ export const Simple = () => {
         username="Jack"
         storyId="test"
         bullet={createMockBullet('Someone')}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
     />);
 };
 
@@ -33,7 +34,7 @@ export const Abbreviation = () => {
         bullet={createMockLongContentBullet('Jack')}
         contentLimit={512}
         getAbbreviation={(author: string) => author.substring(0, 1).toUpperCase()}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
     />);
 };
 
@@ -44,7 +45,7 @@ export const LongContent = () => {
         storyId="test"
         bullet={createMockLongContentBullet('Jack')}
         contentLimit={512}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
     />);
 };
 
@@ -54,6 +55,6 @@ export const RobotAndGenerated = () => {
         username="Jack"
         storyId="test"
         bullet={createMockRobotAndGeneratedBullet('Robot')}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
     />);
 };

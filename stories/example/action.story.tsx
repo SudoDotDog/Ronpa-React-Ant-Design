@@ -5,11 +5,12 @@
  * @override Action
  */
 
+import { action } from '@storybook/addon-actions';
+import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import * as React from 'react';
 import { RonpaComments } from "../../src/index";
 import { createMockRonpa } from "../mock/ronpa";
-import { Button } from 'antd';
 
 export default {
     title: 'Example/Action',
@@ -28,7 +29,7 @@ export const CustomizedActionsUsage = () => {
             path: 'https://google.com/robots.txt',
             uploadedAt: new Date(),
         })}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         ronpa={createMockRonpa("Jack")}
         repliable
         reactions={[{

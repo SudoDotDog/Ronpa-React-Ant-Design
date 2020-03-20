@@ -5,6 +5,7 @@
  * @override Story
  */
 
+import { action } from '@storybook/addon-actions';
 import 'antd/dist/antd.css';
 import * as React from 'react';
 import { RonpaStory } from "../../src/index";
@@ -19,7 +20,7 @@ export const Simple = () => {
 
     return (<RonpaStory
         username="Jack"
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         story={createMockStory()}
     />);
 };
@@ -30,7 +31,7 @@ export const Repliable = () => {
         getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
         username="Jack"
         repliable
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         story={createMockStory()}
     />);
 };
@@ -46,7 +47,7 @@ export const RepliableAttachment = () => {
         editorMode={'attachment'}
         username="Jack"
         repliable
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         story={createMockStory()}
     />);
 };
@@ -56,7 +57,7 @@ export const Reactions = () => {
     return (<RonpaStory
         getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
         username="Jack"
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         reactions={[{
             name: 'like',
             text: '👍',

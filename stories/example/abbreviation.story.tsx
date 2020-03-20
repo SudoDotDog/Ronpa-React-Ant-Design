@@ -5,6 +5,7 @@
  * @override Abbreviation
  */
 
+import { action } from '@storybook/addon-actions';
 import 'antd/dist/antd.css';
 import * as React from 'react';
 import { RonpaComments } from "../../src/index";
@@ -23,9 +24,9 @@ export const CommonUsage = () => {
         }}
         contentLimit={100}
         username="Jack"
-        onAction={console.log}
-        getAvatar={(author) => `https://www.gravatar.com/avatar/${author}`}
-        getAbbreviation={(author) => `Mr/Ms. ${author}`}
+        onAction={(event) => action(event.action)(event)}
+        getAvatar={(author: string) => `https://www.gravatar.com/avatar/${author}`}
+        getAbbreviation={(author: string) => `Mr/Ms. ${author}`}
         ronpa={createMockRonpa("Jack")}
         repliable
         reactions={[{

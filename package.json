@@ -32,6 +32,7 @@
   "devDependencies": {
     "@ant-design/icons": "^4.0.3",
     "@babel/core": "^7.9.0",
+    "@storybook/addon-actions": "^5.3.17",
     "@storybook/addon-info": "^5.3.17",
     "@storybook/addon-knobs": "^5.3.17",
     "@storybook/react": "^5.3.17",

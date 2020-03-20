@@ -5,6 +5,7 @@
  * @override Static
  */
 
+import { action } from '@storybook/addon-actions';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import * as React from 'react';
@@ -19,7 +20,7 @@ export const Thesis = () => {
 
     return (<RonpaStaticEditor
         username="Jack"
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         insiders={['a', 'b']}
     />);
 };
@@ -30,7 +31,7 @@ export const Reply = () => {
         username="Jack"
         story="story"
         reply="reply"
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
     />);
 };
 
@@ -39,7 +40,7 @@ export const CustomizedActions = () => {
 
     return (<RonpaStaticEditor
         username="Jack"
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         actions={(onAction, shouldEmit) => (
             <Button.Group style={{ marginTop: '5px' }}>
                 <Button onClick={onAction} disabled={!shouldEmit()}>Customized Action 1</Button>

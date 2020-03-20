@@ -5,6 +5,7 @@
  * @override File
  */
 
+import { action } from '@storybook/addon-actions';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import * as React from 'react';
@@ -23,7 +24,7 @@ export const Thesis = () => {
             path: 'https://google.com/robots.txt',
             uploadedAt: new Date(),
         })}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         insiders={['a', 'b']}
     />);
 };
@@ -36,7 +37,7 @@ export const Reply = () => {
             path: 'https://google.com/robots.txt',
             uploadedAt: new Date(),
         })}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         story="story"
         reply="reply"
     />);
@@ -50,7 +51,7 @@ export const CustomizedActions = () => {
             path: 'https://google.com/robots.txt',
             uploadedAt: new Date(),
         })}
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         actions={(onAction, shouldEmit) => (
             <Button.Group style={{ marginTop: '5px' }}>
                 <Button onClick={onAction} disabled={!shouldEmit()}>Customized Action 1</Button>

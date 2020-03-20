@@ -5,6 +5,7 @@
  * @override Action
  */
 
+import { action } from '@storybook/addon-actions';
 import 'antd/dist/antd.css';
 import * as React from 'react';
 import { RonpaComments } from "../../src/index";
@@ -22,7 +23,7 @@ export const Common = () => {
             fontStyle: 'italic',
         }}
         username="Jack"
-        onAction={console.log}
+        onAction={(event) => action(event.action)(event)}
         ronpa={createMockRonpa("Jack")}
         repliable
         reactions={[{
