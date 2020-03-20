@@ -92,8 +92,21 @@ export class RonpaBullet extends React.Component<RonpaBulletProps, RonpaBulletSt
         return (<span className={this._bulletStyle.author}>
             {this._renderRobotIcon(bullet)}
             {this._renderGeneratedIcon(bullet)}
-            {bullet.by}
+            {this._renderAuthorName(bullet.by)}
         </span>)
+    }
+
+    private _renderAuthorName(author: string) {
+
+        if (this.props.getAbbreviation) {
+
+            const abbreviation: string | React.ReactNode = this.props.getAbbreviation(author);
+            return (<Tooltip title={author}>
+                <span>{abbreviation}</span>
+            </Tooltip>);
+        }
+
+        return author;
     }
 
     private _renderRobotIcon(bullet: Bullet<any>) {

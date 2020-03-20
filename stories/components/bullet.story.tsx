@@ -25,6 +25,18 @@ export const Simple = () => {
     />);
 };
 
+export const Abbreviation = () => {
+
+    return (<RonpaBullet
+        username="Jack"
+        storyId="test"
+        bullet={createMockLongContentBullet('Jack')}
+        contentLimit={512}
+        getAbbreviation={(author: string) => author.substring(0, 1).toUpperCase()}
+        onAction={console.log}
+    />);
+};
+
 export const LongContent = () => {
 
     return (<RonpaBullet
