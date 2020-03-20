@@ -18,4 +18,14 @@ export default {
         bundlerConfig.module.rules.push(...rules);
         return bundlerConfig;
     },
+    modifyBabelRc: babelrc => {
+        const newBabelRc = {
+            ...babelrc,
+            plugins: [
+                ...babelrc.plugins,
+                "@babel/plugin-proposal-numeric-separator",
+            ],
+        };
+        return newBabelRc;
+    },
 };
