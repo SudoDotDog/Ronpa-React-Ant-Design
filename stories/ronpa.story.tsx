@@ -23,7 +23,7 @@ export class ExamplePlayground extends React.Component {
         ronpa: createMockRonpa("Jack"),
     };
 
-    render() {
+    public render() {
         return (<RonpaComments
             contentStyle={{
                 fontStyle: 'italic',
