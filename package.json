@@ -1,6 +1,6 @@
 {
   "name": "@ronpa/react-ant-design",
-  "version": "1.6.1",
+  "version": "2.0.0",
   "description": ":mailbox: Ant Design React UI Example Implement For Ronpa",
   "main": "index.js",
   "directories": {
