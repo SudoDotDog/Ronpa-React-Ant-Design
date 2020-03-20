@@ -39,6 +39,7 @@
     "antd": "^4.0.3",
     "css-loader": "^3.4.2",
     "docz": "^2.2.0",
+    "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.20",
     "ronpa": "^1.12.2",
     "style-loader": "^1.1.3",
