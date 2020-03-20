@@ -37,7 +37,7 @@ export type RonpaBulletProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult> | RonpaEditorUploadResult;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
     readonly editorMode?: EditorMode;
     readonly editorActions?: EditorActionFunction;

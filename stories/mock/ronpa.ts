@@ -79,7 +79,7 @@ export const createMockRonpa = (username?: string): Ronpa => {
     });
 
     ronpa.addStory(story);
-    const secondStory: Story = ronpa.createAndGetStory(username, chance.paragraph());
+    const secondStory: Story = ronpa.createAndGetStory(username ?? '', chance.paragraph());
 
     /* cSpell:disable */
     const bullet3: Bullet<RECORD_TYPE.ATTACHMENT> = Bullet.fromRecord<RECORD_TYPE.ATTACHMENT>({

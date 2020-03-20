@@ -9,7 +9,6 @@ import * as React from "react";
 import { ChangeType, Ronpa, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { EditorActionFunction, EditorMode, RonpaEditorUploadResult } from "../editor/type";
-import { ronpaStyle } from "../style/ronpa";
 import { RonpaStory } from "./story";
 
 export type RonpaCommentsProps = {
@@ -28,15 +27,13 @@ export type RonpaCommentsProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult> | RonpaEditorUploadResult;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
     readonly editorMode?: EditorMode;
     readonly editorActions?: EditorActionFunction;
 };
 
 export class RonpaComments extends React.Component<RonpaCommentsProps> {
-
-    private readonly _ronpaStyle = ronpaStyle.use();
 
     public constructor(props: RonpaCommentsProps) {
 

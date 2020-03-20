@@ -5,7 +5,7 @@
  */
 
 import * as React from "react";
-import Icon, { FileTextFilled, FileImageFilled, FileExcelFilled, FileExclamationFilled, FilePdfFilled, FileWordFilled, FilePptFilled, FileZipFilled, FileUnknownFilled } from "@ant-design/icons";
+import { FileTextFilled, FileImageFilled, FileExcelFilled, FileExclamationFilled, FilePdfFilled, FileWordFilled, FilePptFilled, FileZipFilled, FileUnknownFilled } from "@ant-design/icons";
 import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
 
 export type FileIconProps = {

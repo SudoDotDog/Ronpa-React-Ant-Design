@@ -9,7 +9,6 @@ import * as React from "react";
 import { Bullet, ChangeType, RONPA_ACTION, Story } from "ronpa";
 import { ReactionPropsConfig } from "../declare";
 import { EditorActionFunction, EditorMode, RonpaEditorUploadResult } from "../editor/type";
-import { storyStyle } from "../style/story";
 import { RonpaBullet } from "./bullet";
 
 export type RonpaStoryProps = {
@@ -28,15 +27,13 @@ export type RonpaStoryProps = {
     readonly reactions?: ReactionPropsConfig[];
 
     readonly getAvatar?: (author: string) => string | React.ReactNode;
-    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult>;
+    readonly uploadFile?: (file: File) => Promise<RonpaEditorUploadResult> | RonpaEditorUploadResult;
     readonly onAction?: <T extends RONPA_ACTION>(change: ChangeType<T>) => void;
     readonly editorMode?: EditorMode;
     readonly editorActions?: EditorActionFunction;
 };
 
 export class RonpaStory extends React.Component<RonpaStoryProps> {
-
-    private readonly _storyStyle = storyStyle.use();
 
     public constructor(props: RonpaStoryProps) {
 
