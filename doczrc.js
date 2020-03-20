@@ -12,12 +12,10 @@ export default {
         const newBabelRc = {
             ...babelrc,
             plugins: [
-                "@babel/plugin-proposal-numeric-separator",
                 ...babelrc.plugins,
             ],
         };
 
-        console.log(newBabelRc);
         return newBabelRc;
     },
 };

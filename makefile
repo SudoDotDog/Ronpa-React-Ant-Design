@@ -55,3 +55,7 @@ clean-linux:
 publish: install tests license build
 	@echo "[INFO] Publishing package"
 	@cd app && npm publish --access=public
+
+ts-version:
+	@echo "[INFO] Getting TypeScript Version"
+	@NODE_ENV=development $(tsc) --version
