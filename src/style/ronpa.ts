@@ -5,8 +5,9 @@
  */
 
 import { StyleManager, Styles } from "@sudoo/jss";
+import { ronpaReactAntDesignStyleCollection } from "../common/style";
 
 const ronpaStyleBase: Styles = {
 };
 
-export const ronpaStyle: StyleManager = StyleManager.create(ronpaStyleBase, 'Ronpa').setPrefix('Ronpa-React-Ant-Design-');
+export const ronpaStyle: StyleManager = ronpaReactAntDesignStyleCollection.hydrate('Ronpa', ronpaStyleBase);

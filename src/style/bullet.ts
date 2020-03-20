@@ -5,6 +5,7 @@
  */
 
 import { StyleManager, Styles } from "@sudoo/jss";
+import { ronpaReactAntDesignStyleCollection } from "../common/style";
 
 const bulletStyleBase: Styles = {
 
@@ -30,4 +31,4 @@ const bulletStyleBase: Styles = {
     },
 };
 
-export const bulletStyle: StyleManager = StyleManager.create(bulletStyleBase, 'Bullet').setPrefix('Ronpa-React-Ant-Design-');
+export const bulletStyle: StyleManager = ronpaReactAntDesignStyleCollection.hydrate('Bullet', bulletStyleBase);

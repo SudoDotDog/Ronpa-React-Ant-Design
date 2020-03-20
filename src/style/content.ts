@@ -5,6 +5,7 @@
  */
 
 import { StyleManager, Styles } from "@sudoo/jss";
+import { ronpaReactAntDesignStyleCollection } from "../common/style";
 
 const contentStyleBase: Styles = {
 
@@ -30,4 +31,4 @@ const contentStyleBase: Styles = {
     },
 };
 
-export const contentStyle: StyleManager = StyleManager.create(contentStyleBase, 'Content').setPrefix('Ronpa-React-Ant-Design-');
+export const contentStyle: StyleManager = ronpaReactAntDesignStyleCollection.hydrate('Content', contentStyleBase);
