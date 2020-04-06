@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design_Stories
- * @description Components
+ * @description Story
  * @override Story
  */
 

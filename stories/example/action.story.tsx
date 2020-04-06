@@ -2,7 +2,7 @@
  * @author WMXPY
  * @namespace React_Ant_Design_Stories
  * @description Action
- * @override Stroy
+ * @override Story
  */
 
 import { action } from '@storybook/addon-actions';

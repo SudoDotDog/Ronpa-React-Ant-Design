@@ -1,8 +1,8 @@
 /**
  * @author WMXPY
  * @namespace React_Ant_Design_Stories
- * @description Content
- * @override File
+ * @description File
+ * @override Story
  */
 
 import 'antd/dist/antd.css';
