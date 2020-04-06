@@ -4,6 +4,7 @@ tsconfig_build_path := typescript/tsconfig.build.json
 # NPX functions
 tsc := node_modules/.bin/tsc
 start-storybook := node_modules/.bin/start-storybook
+build-storybook := node_modules/.bin/build-storybook
 mocha := node_modules/.bin/mocha
 ts_node := node_modules/.bin/ts-node
 
@@ -12,8 +13,12 @@ ts_node := node_modules/.bin/ts-node
 main: run
 
 run: 
-	@echo "[INFO] Starting Storybook environment"
+	@echo "[INFO] Starting Storybook Environment"
 	@NODE_ENV=development $(start-storybook)
+
+story:
+	@echo "[INFO] Building Storybook Page"
+	@NODE_ENV=development $(build-storybook)
 
 build:
 	@echo "[INFO] Building for release"
